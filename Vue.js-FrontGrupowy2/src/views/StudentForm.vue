@@ -33,7 +33,7 @@ import axios from 'axios';
                 <div class="flex flex-col justify-evenly px-6 pt-8 h-full">
                     <div class="flex justify-start flex-wrap gap-x-2 pb-16">
                         <div class="bg-gray-800">
-                            <div><img :src="imagesrc" class="max-w-64 max-h-64" alt="" /></div>
+                            <div><img :src="imagesrc" class="w-64 h-64" alt="" /></div>
                         </div>
                         <div class="flex flex-col justify-between">
                             <div class="px-16 block uppercase tracking-wide text-white-700 text-xs font-bold mb-2">

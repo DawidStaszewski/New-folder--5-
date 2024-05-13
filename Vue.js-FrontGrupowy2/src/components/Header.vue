@@ -12,26 +12,39 @@
                 ">
             <div class="_top flex w-full justify-between h-15 px-4 overflow-hidden">
                 <div class="flex items-center gap-4">
-                    <div>Klient Indywidualny</div>
-                    <div>Select</div>
-                    <div>Private Banking</div>
-                    <div>Małe Firmy</div>
+                    <div><button @click="OfertyPracy">OfertyPracy</button></div>
+                    <div><button @click="OfertyPracy">Proponowane Oferty(jak sie zrobi quizz)</button></div>
+                    <div>Biuro Karier</div>
                     <div>Duże Korporacje i Firmy</div>
                 </div>
                 <div class="flex justify-between items-center gap-4">
-                    <div class="border rounded-xl px-5 py-2">Profil</div>
-                    <div class="border rounded-xl px-5 py-2">Zaloguj się</div>
-                    <div class="border rounded-xl px-5 py-2">Utwórz Konto się</div>
+                    <div class="border rounded-xl px-5 py-2"><button @click="ProfilStudent">Profil</button></div>
+                    <div class="border rounded-xl px-5 py-2"><button @click="Login">Zaloguj sie</button></div>
+                    <div class="border rounded-xl px-5 py-2"><button @click="Form">Utwórz Konto</button></div>
                 </div>
             </div>
         </div>
+
         <div class="bottom-0 left-50 h-50 w-50 absolute"></div>
     </div>
 </template>
 
 <script>
 export default {
-
+    methods: {
+        OfertyPracy() {
+            this.$router.push('/Main');
+        },
+        Login() {
+            this.$router.push('/LoginView');
+        },
+        Form() {
+            this.$router.push('/Form');
+        },
+        ProfilStudent() {
+            this.$router.push('/StudentForm');
+        },
+    }
 }
 </script>
 

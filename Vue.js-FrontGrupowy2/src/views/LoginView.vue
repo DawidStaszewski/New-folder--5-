@@ -8,59 +8,28 @@ import axios from 'axios';
 <template class="w-screen h-full">
     <Header></Header>
     <div>
-        <div class="flex justify-center pt-24">
+        <div class="flex justify-center pt-36">
             <form class="w-full max-w-lg">
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 
                         <label class="_label block mb-2">
-                            First Name
+                            Email
                         </label>
 
                         <input class="_cinput mb-3" type="text">
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                         <label class="_label block mb-2">
-                            Last Name
+                            Password
                         </label>
                         <input class="_cinput " type="text">
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="_label block mb-2">
-                            Password
-                        </label>
-                        <input class="_cinput mb-3 text-black" type="password">
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="_label block mb-2">
-                            City
-                        </label>
-                        <input class="_cinput" type="text">
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="_label block mb-2">
-                            State
-                        </label>
-                        <div class="relative">
-                            <select class="_cinput pr-8">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="_label block mb-2">
-                            Zip
-                        </label>
-                        <input class="_cinput" type="text">
-                    </div>
+                <div>
+                    <button
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded justify-center flex"
+                        @click="LoginForm">Login</button>
                 </div>
             </form>
         </div>
@@ -69,6 +38,7 @@ import axios from 'axios';
 
 <script>
 export default {
+
     components: {
         Header
     },
@@ -79,6 +49,9 @@ export default {
     },
     methods: {
         async asyncData() {
+        },
+        LoginForm() {
+            this.$router.push('/StudentForm');
         },
     },
     mounted() { this.asyncData(); console.log(this.questions) },
