@@ -15,7 +15,7 @@
                     <div><button @click="OfertyPracy">OfertyPracy</button></div>
                     <div><button @click="OfertyPracy">Proponowane Oferty(jak sie zrobi quizz)</button></div>
                     <div>Biuro Karier</div>
-                    <div>Duże Korporacje i Firmy</div>
+                    <div><button @click="MainLogin">Duże Korporacje i Firmy</button></div>
                 </div>
                 <div class="flex justify-between items-center gap-4">
                     <div class="border rounded-xl px-5 py-2"><button @click="ProfilStudent">Profil</button></div>
@@ -32,6 +32,9 @@
 <script>
 export default {
     methods: {
+        MainLogin() {
+            this.$router.push('/Login');
+        },
         OfertyPracy() {
             this.$router.push('/Main');
         },
