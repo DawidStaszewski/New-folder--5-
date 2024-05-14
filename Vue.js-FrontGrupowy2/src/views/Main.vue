@@ -5,7 +5,7 @@ import axios from 'axios';
 </script>
 
 
-<template class=" w-screen h-full">
+<template class=" w-screen h-full ">
     <div class="">
         <Header></Header>
 
@@ -16,7 +16,7 @@ import axios from 'axios';
 
         <div class="_main px-72 gap-x-3 pb-6">
 
-            <div class="_imainl bg-gray-600 border rounded-xl">
+            <div class="_imainl bg-gray-500 border rounded-xl">
                 <div class="py-3 px-3">Jakiś text tu będzie menu?</div>
                 <div class="flex flex-col  gap-y-3 px-3 py-3">
                     <div class="bg-gray-800 w-full h-full flex justify-center" v-for="i in 100" :key="i">
@@ -25,12 +25,12 @@ import axios from 'axios';
                 </div>
             </div>
 
-            <div class="_imainr  flex items-center justify-center bg-gray-600 border rounded-xl">
-                <div class="flex flex-col  gap-y-3 px-3 py-3">
-                    <div v-for="(cat, i) in questions" :key="`cat_${i}`" class="bg-gray-800 pb-6">
-                        <div class=" px-6">
+            <div class="_imainr  flex items-center justify-center bg-gray-500 border rounded-xl">
+                <div class="flex flex-col  gap-y-3 px-3 py-3 ">
+                    <div v-for="(cat, i) in questions" :key="`cat_${i}`" class="bg-gray-800 pb-6 border rounded-xl">
+                        <div class=" px-6 ">
                             <div class="_name flex-1 py-6 ">
-                                <div class="text-20 text-center w-full">{{ cat.displayName }}adadawd</div>
+                                <div class="text-20 text-center w-full ">{{ cat.displayName }}adadawd</div>
                             </div>
                             <div class="_about">
                                 <div class="_role text-20 --font-secondary">

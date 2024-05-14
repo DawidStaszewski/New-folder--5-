@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 <template class=" w-screen h-full">
-    <div class="">
+    <div class="bg-gray-700">
         <Header></Header>
 
         <div class="pt-16 px-72 ">

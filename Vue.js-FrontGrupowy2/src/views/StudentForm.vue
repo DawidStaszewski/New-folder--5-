@@ -5,7 +5,7 @@ import axios from 'axios';
 </script>
 
 
-<template class=" w-screen h-full">
+<template class=" w-screen h-full ">
     <div class="">
         <Header></Header>
 

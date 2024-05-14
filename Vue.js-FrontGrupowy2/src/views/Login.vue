@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-700">
+  <div class="min-h-screen flex items-center justify-center">
     <div class="max-w-4xl w-full shadow-lg rounded-lg overflow-hidden flex">
 
       <div class="w-1/2 bg-gray-600 p-8">
@@ -53,7 +53,7 @@ export default {
   name: 'LoginView',
   methods: {
     LoginView() {
-      this.$router.push('/LoginView');
+      this.$router.push('/StudentForm');
     },
   }
 }

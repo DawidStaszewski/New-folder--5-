@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex justify-between items-center gap-4">
                     <div class="border rounded-xl px-5 py-2"><button @click="ProfilStudent">Profil</button></div>
-                    <div class="border rounded-xl px-5 py-2"><button @click="Login">Zaloguj sie</button></div>
+                    <div class="border rounded-xl px-5 py-2"><button @click="MainLogin">Zaloguj sie</button></div>
                     <div class="border rounded-xl px-5 py-2"><button @click="Form">Utwórz Konto</button></div>
                 </div>
             </div>
