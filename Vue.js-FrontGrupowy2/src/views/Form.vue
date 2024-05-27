@@ -1,29 +1,28 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Header from '../components/Header.vue'
-import axios from 'axios';
-</script>
-
-
 <template class="w-screen h-full">
     <Header></Header>
     <div>
         <div class="flex justify-center pt-24">
-            <form class="w-full max-w-lg">
+            <form class="w-full max-w-lg" @submit.prevent="register">
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-
                         <label class="_label block mb-2">
-                            First Name
+                            Imię
                         </label>
-
-                        <input class="_cinput mb-3" type="text">
+                        <input class="_cinput mb-3" type="text" v-model="firstName">
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                         <label class="_label block mb-2">
-                            Last Name
+                            Nazwisko
                         </label>
-                        <input class="_cinput " type="text">
+                        <input class="_cinput" type="text" v-model="lastName">
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="_label block mb-2">
+                            Email
+                        </label>
+                        <input class="_cinput mb-3 text-black" type="email" v-model="email">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
@@ -31,58 +30,81 @@ import axios from 'axios';
                         <label class="_label block mb-2">
                             Password
                         </label>
-                        <input class="_cinput mb-3 text-black" type="password">
+                        <input class="_cinput mb-3 text-black" type="password" v-model="password">
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="_label block mb-2">
+                            O mnie
+                        </label>
+                        <input class="_cinput mb-3 text-black" type="text" v-model="about">
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="_label block mb-2">
+                            Kompetencje
+                        </label>
+                        <input class="_cinput mb-3 text-black" type="text" v-model="skills">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="_label block mb-2">
-                            City
+                            Zdjecie
                         </label>
-                        <input class="_cinput" type="text">
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="_label block mb-2">
-                            State
-                        </label>
-                        <div class="relative">
-                            <select class="_cinput pr-8">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 ">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="_label block mb-2">
-                            Zip
-                        </label>
-                        <input class="_cinput" type="text">
+                        <input class="_cinput" type="file" @change="handleFileUpload">
                     </div>
                 </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                    Zarejestruj się
+                </button>
+                <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
             </form>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    components: {
-        Header
-    },
-    data() {
-        return {
-            questions: []
-        };
-    },
-    methods: {
-        async asyncData() {
-        },
-    },
-    mounted() { this.asyncData(); console.log(this.questions) },
-}
+<script setup>
+import { ref } from 'vue';
+import Header from '../components/Header.vue';
+import api from '../services/api';
+
+const firstName = ref('');
+const lastName = ref('');
+const email = ref('');
+const password = ref('');
+const about = ref('');
+const skills = ref('');
+const file = ref(null);
+const error = ref(null);
+
+const handleFileUpload = (event) => {
+    file.value = event.target.files[0];
+};
+
+const register = async () => {
+    const formData = new FormData();
+    formData.append('imie', firstName.value);
+    formData.append('nazwisko', lastName.value);
+    formData.append('email', email.value);
+    formData.append('password', password.value);
+    formData.append('opis', about.value);
+    formData.append('kompetencje', skills.value);
+    if (file.value) {
+        formData.append('zdjecie', file.value);
+    }
+
+    try {
+        const response = await api.studentRegister(formData);
+        console.log('Registration successful', response.data);
+        // Handle successful registration, e.g., redirect or show a message
+    } catch (err) {
+        console.error('Registration failed', err);
+        error.value = 'Registration failed. Please check your input.';
+    }
+};
 </script>
 
 <style scoped>
