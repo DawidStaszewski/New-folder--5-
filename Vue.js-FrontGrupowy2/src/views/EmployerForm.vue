@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Header from '../components/Header.vue'
 import axios from 'axios';
+import MainSearch from '../components/MainSearch.vue'
 </script>
 
 
@@ -88,7 +89,8 @@ import axios from 'axios';
 <script>
 export default {
     components: {
-        Header
+        Header,
+        MainSearch
     },
     data() {
         return {
@@ -97,29 +99,7 @@ export default {
     },
     methods: {
         async asyncData() {
-            try {
-                let Toster = []
 
-
-                let response = await axios.get(`https://valorant-api.com/v1/agents`)
-                Toster.push(...response.data.data)
-
-
-                console.log('w111qeqweqweqe')
-                console.log(response)
-                console.log('wqeqweqweqe')
-                console.log(response.data)
-                console.log(Toster)
-                this.questions = Toster
-            } catch (err) {
-                console.log(err)
-                if (axios.isCancel(error)) {
-                    console.log('Aborted')
-                } else {
-                    error({ statusCode: 500 })
-                    return
-                }
-            }
         },
     },
     mounted() { this.asyncData(); console.log(this.questions) },

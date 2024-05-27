@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Header from '../components/Header.vue'
 import axios from 'axios';
+import MainSearch from '../components/MainSearch.vue'
 </script>
 
 
