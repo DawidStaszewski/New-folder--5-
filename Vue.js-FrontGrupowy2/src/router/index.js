@@ -6,6 +6,8 @@ import StudentForm from "@/views/StudentForm.vue";
 import EmployerForm from "@/views/EmployerForm.vue";
 import LoginView from "@/views/LoginView.vue";
 import Login from "@/views/Login.vue";
+import StudentRegister from "@/views/register/StudentRegister.vue";
+import EmployerRegister from "@/views/register/EmployerRegister.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +16,21 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/LoginView",
+      name: "LoginView",
+      component: LoginView,
+    },
+    {
+      path: "/student/register",
+      name: "StudentRegister",
+      component: StudentRegister,
+    },
+    {
+      path: "/employer/register",
+      name: "EmployerRegister",
+      component: EmployerRegister,
     },
     {
       path: "/LoginView",

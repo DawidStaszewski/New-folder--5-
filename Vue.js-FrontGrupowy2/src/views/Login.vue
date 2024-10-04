@@ -29,13 +29,13 @@
           <p class="mb-4 text-sm">Jesteś studentem lub niedawno skończyłeś studia i szukasz swojej pierwszej pracy?
             Zarejestruj się tutaj!</p>
           <div class="flex flex-col mb-6">
-            <router-link to="/register/employee"
+            <router-link to="/student/register"
               class="mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Rejestracja
               Studenta/Absolwenta</router-link>
           </div>
           <p class="mb-4">Jesteś pracodawcą i szukasz zdolnych absolwentów do swojego zespołu? Zarejestruj się tutaj!</p>
           <div class="flex flex-col">
-            <router-link to="/register/employer"
+            <router-link to="/employer/register"
               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Rejestracja
               Pracodawcy</router-link>
           </div>
