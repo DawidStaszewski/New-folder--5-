@@ -1,3 +1,10 @@
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import Header from '../components/Header.vue'
+import axios from 'axios';
+import MainSearch from '../components/MainSearch.vue'
+</script>
+
 <template class="w-screen h-full">
     <div>
         <Header></Header>
@@ -36,7 +43,7 @@
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
                         <label class="_label block mb-2">
-                            O mnie
+                            Uczelnia
                         </label>
                         <input class="_cinput mb-3 text-black" type="text" v-model="about">
                     </div>
@@ -59,7 +66,7 @@
                 </div>
                 <button type="submit"
                     class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
-                    Zarejestruj się
+                    Utwórz Konto
                 </button>
                 <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
             </form>

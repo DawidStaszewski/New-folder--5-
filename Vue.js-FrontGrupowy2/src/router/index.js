@@ -8,6 +8,9 @@ import LoginView from "@/views/LoginView.vue";
 import Login from "@/views/Login.vue";
 import StudentRegister from "@/views/register/StudentRegister.vue";
 import EmployerRegister from "@/views/register/EmployerRegister.vue";
+import AdminPannel from "@/views/AdminPannel.vue";
+import PKSForm from "@/views/PKSForm.vue";
+import UserBanTemporary from "@/views/UserBanTemporary.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +65,22 @@ const router = createRouter({
       name: "EmployerForm",
       component: EmployerForm,
     },
+    {
+      path: "/PKSForm",
+      name: "PKSForm",
+      component: PKSForm,
+    },
+    {
+      path: "/AdminPannel",
+      name: "AdminPannel",
+      component: AdminPannel,
+    },
+    {
+      path: "/UserBanTemporary",
+      name: "UserBanTemporary",
+      component: UserBanTemporary,
+    },
+
     {
       path: "/about",
       name: "about",
