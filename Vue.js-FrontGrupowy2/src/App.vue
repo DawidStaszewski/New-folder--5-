@@ -22,31 +22,7 @@ export default {
     };
   },
   methods: {
-    async asyncData() {
-      try {
-        let Toster = []
-
-
-        let response = await axios.get(`https://valorant-api.com/v1/agents`)
-        Toster.push(...response.data.data)
-
-
-        console.log('w111qeqweqweqe')
-        console.log(response)
-        console.log('wqeqweqweqe')
-        console.log(response.data)
-        console.log(Toster)
-        this.questions = Toster
-      } catch (err) {
-        console.log(err)
-        if (axios.isCancel(error)) {
-          console.log('Aborted')
-        } else {
-          error({ statusCode: 500 })
-          return
-        }
-      }
-    },
+    async asyncData() { }
   },
   mounted() { this.asyncData(); console.log(this.questions) },
 }

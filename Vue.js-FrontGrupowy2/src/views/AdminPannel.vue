@@ -10,34 +10,37 @@ import MainSearch from '../components/MainSearch.vue'
         <Header></Header>
         <div class="flex items-center justify-center py-20 ">
             <div class="_imain w-3/5 flex items-center justify-center bg-gray-500 border rounded-xl">
-                <div class="flex flex-col  gap-y-3 px-3 py-3 ">
+                <div class="flex flex-col gap-y-3 px-3 py-3 ">
                     <div v-for="(cat, i) in questions" :key="`cat_${i}`" class="bg-gray-800 pb-6 border rounded-xl">
-                        <div class=" px-6 flex">
+                        <div class="px-6 flex">
                             <div>
                                 <div class="_name flex-1 py-6 ">
-                                    <div class="text-20 text-center w-full ">{{ cat.displayName }}adadawd</div>
+                                    <div class="text-20 text-center w-full">{{ cat.companyname }}</div>
+
                                 </div>
                                 <div class="_about">
                                     <div class="_role text-20 --font-secondary">
-                                        {{ cat.role?.displayName }}
+                                        {{ cat.krsnumber }}
                                     </div>
                                     <div class="_biography text-5 border-b border-white h-90">
-                                        {{ cat.description }}
+                                        Zatwierdzony: {{ cat.verified }}
                                     </div>
                                     <div class="_biography text-5 border-b border-white h-90">
-                                        NIP
+                                        Data utworzenia: {{ cat.created_at }}
                                     </div>
                                     <div class="_biography text-5 border-b border-white h-90">
-                                        FIRMA
+                                        Data utworzenia: {{ cat.id }}
                                     </div>
                                 </div>
-
                             </div>
                             <div class="pl-6 pt-6 flex flex-col items-center justify-around ">
-                                <div class="border rounded-xl w-12 text-center h-6 bg-green-500">Tak</div>
-                                <div class="border rounded-xl w-12 text-center h-6 bg-red-800">Nie</div>
+                                <div class="border rounded-xl w-12 text-center h-6 bg-green-500"
+                                    @click="verifyEmployer(cat.id)">
+                                    Tak
+                                </div>
+                                <div class="border rounded-xl w-12 text-center h-6 bg-red-800"
+                                    @click="addToBlacklist(cat.id)">Usuń</div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -59,31 +62,38 @@ export default {
     methods: {
         async asyncData() {
             try {
-                let Toster = []
-
-
-                let response = await axios.get(`https://valorant-api.com/v1/agents`)
-                Toster.push(...response.data.data)
-
-
-                console.log('w111qeqweqweqe')
-                console.log(response)
-                console.log('wqeqweqweqe')
-                console.log(response.data)
-                console.log(Toster)
-                this.questions = Toster
+                let response = await axios.get(`http://localhost:8080/api/admin/employers`);
+                this.questions = response.data.data;
             } catch (err) {
-                console.log(err)
-                if (axios.isCancel(error)) {
-                    console.log('Aborted')
-                } else {
-                    error({ statusCode: 500 })
-                    return
-                }
+                console.error('Bład', err);
             }
         },
+        async addToBlacklist(userId) {
+            try {
+                await axios.post(`http://localhost:8080/api/admin/blacklist/${userId}`);
+                console.log(`Blacklist ${userId}`);
+                this.questions = this.questions.filter(cat => cat.id !== userId);
+                this.asyncData();
+            } catch (err) {
+                console.error('Bład', err);
+            }
+        },
+        async verifyEmployer(employerId) {
+            try {
+                await axios.patch(`http://localhost:8080/api/admin/employers/${employerId}`, {
+                    verified: true
+                });
+                console.log(`Employer ${employerId} verified`);
+                this.asyncData();
+            } catch (err) {
+                console.error('Błąd podczas weryfikacji pracodawcy', err);
+            }
+        }
+
     },
-    mounted() { this.asyncData(); console.log(this.questions) },
+    mounted() {
+        this.asyncData();
+    },
 }
 </script>
 
