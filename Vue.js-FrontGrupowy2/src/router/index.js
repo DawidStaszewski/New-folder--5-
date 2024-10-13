@@ -11,6 +11,10 @@ import EmployerRegister from "@/views/register/EmployerRegister.vue";
 import AdminPannel from "@/views/AdminPannel.vue";
 import PKSForm from "@/views/PKSForm.vue";
 import UserBanTemporary from "@/views/UserBanTemporary.vue";
+import EmployerPannel from "@/views/EmployerPannel.vue";
+import NewOffer from "@/views/employer/NewOffer.vue";
+import MyOffers from "@/views/employer/MyOffers.vue";
+import EmployerProfile from "@/views/employer/EmployerProfile.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +23,28 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/EmployerPannel",
+      name: "EmployerPannel",
+      component: EmployerPannel,
+      children: [
+        {
+          path: "new-offer", // /EmployerPannel/new-offer
+          name: "NewOffer",
+          component: NewOffer,
+        },
+        {
+          path: "my-offers", // /EmployerPannel/my-offers
+          name: "MyOffers",
+          component: MyOffers,
+        },
+        {
+          path: "profile", // /EmployerPannel/profile
+          name: "EmployerProfile",
+          component: EmployerProfile,
+        },
+      ],
     },
     {
       path: "/LoginView",
