@@ -1,11 +1,11 @@
 <template>
-    <div class="">
+    <div>
         <div class="flex items-center justify-center py-20">
             <div class="w-3/5 bg-gray-500 border rounded-xl p-6">
-                <h2 class="text-center text-2xl mb-4">Moje Oferty</h2>
 
-                <!-- Sprawdzenie, czy są jakieś oferty do wyświetlenia -->
-                <div v-if="offers.length > 0" class="flex flex-col gap-4">
+                <div class="flex flex-col gap-4">
+                    <pre>{{ offers }}</pre>
+
                     <div v-for="(offer) in offers" :key="offer.id" class="bg-gray-800 border rounded-xl p-4">
                         <div class="flex justify-between items-center">
                             <div>
@@ -18,8 +18,6 @@
                     </div>
                 </div>
 
-                <!-- Jeśli nie ma żadnych ofert -->
-                <div v-else class="text-center text-white">Nie masz jeszcze żadnych ofert.</div>
             </div>
         </div>
     </div>
@@ -29,41 +27,33 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
-// Przechowywanie ofert
 const offers = ref([])
 
-// Funkcja do pobierania ofert
 const fetchOffers = async () => {
     try {
         const response = await axios.get('http://localhost:8080/api/offer/list')
-        offers.value = response.data.data // Przypisanie danych z odpowiedzi
+        console.log('Response data:', response.data)
+        offers.value = response.data.data || []
+        console.log('Offers.value:', offers.value)
     } catch (err) {
         console.error('Błąd podczas pobierania ofert', err)
     }
 }
 
-// Funkcja do usuwania oferty
 const deleteOffer = async (offerId) => {
     try {
+        console.log('Usuwanie oferty o ID:', offerId)
         await axios.delete(`http://localhost:8080/api/offer/delete/${offerId}`)
-        offers.value = offers.value.filter((offer) => offer.id !== offerId) // Aktualizacja listy po usunięciu
+        offers.value = offers.value.filter((offer) => offer.id !== offerId)
         alert('Oferta została usunięta')
     } catch (err) {
         console.error('Błąd podczas usuwania oferty', err)
     }
 }
 
-// Pobranie ofert przy montowaniu komponentu
 onMounted(() => {
     fetchOffers()
 })
 </script>
 
-<style scoped>
-body {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
-</style>
+<style scoped></style>
