@@ -11,7 +11,11 @@ import EmployerRegister from "@/views/register/EmployerRegister.vue";
 import AdminPannel from "@/views/AdminPannel.vue";
 import PKSForm from "@/views/PKSForm.vue";
 import UserBanTemporary from "@/views/UserBanTemporary.vue";
-
+import QuizPage from "@/views/student/QuizPage.vue";
+import EducationalMaterials from "@/views/student/EducationalMaterials.vue";
+import JobOffers from "@/views/student/JobOffers.vue";
+import ProfilePage from "@/views/student/ProfilePage.vue";
+import JobOfferDetails from "@/views/student/JobOfferDetails.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -74,6 +78,10 @@ const router = createRouter({
       path: "/AdminPannel",
       name: "AdminPannel",
       component: AdminPannel,
+      // meta: {
+      //   requiresAuth: true,
+      //   roles: [4],
+      // },
     },
     {
       path: "/UserBanTemporary",
@@ -89,7 +97,67 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
     },
+    {
+      path: "/student/quiz",
+      name: "QuizPage",
+      component: QuizPage,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/student/educational-materials",
+      name: "EducationalMaterials",
+      component: EducationalMaterials,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/student/job-offers",
+      name: "JobOffers",
+      component: JobOffers,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/student/job-offers/:id",
+      name: "JobOfferDetails",
+      component: JobOfferDetails,
+      props: true,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/student/profile",
+      name: "ProfilePage",
+      component: ProfilePage,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  // Check if route requires authentication
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    const isAuthenticated = store.getters.isAuthenticated;
+
+    if (!isAuthenticated) {
+      // Redirect to login if not authenticated
+      next({
+        path: "/login",
+        query: { redirect: to.fullPath },
+      });
+    } else {
+      // If authenticated, check if role is allowed
+      const userRole = store.getters.userRole;
+      const allowedRoles = to.meta.roles;
+
+      if (allowedRoles && allowedRoles.includes(userRole)) {
+        next();
+      } else {
+        // If role is not allowed, redirect to login or unauthorized page
+        next({ path: "/login", query: { unauthorized: true } });
+      }
+    }
+  } else {
+    // If route does not require auth, proceed
+    next();
+  }
 });
 
 export default router;

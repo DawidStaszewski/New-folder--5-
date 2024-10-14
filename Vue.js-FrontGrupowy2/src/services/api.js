@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import store from "@/store";
 const apiClient = axios.create({
   baseURL: "http://localhost:8080/api", // Adjust the base URL to match your Laravel API URL
   withCredentials: true, // Include credentials for CSRF protection if necessary
@@ -14,10 +14,16 @@ export default {
     return apiClient.post("/register", data);
   },
   studentLogin(data) {
-    return apiClient.post("/student/login", data);
+    return apiClient.post("/login", data);
   },
   getStudentMe() {
     return apiClient.get("/student/me");
+  },
+  getJobOffers() {
+    return apiClient.get("/offer/list");
+  },
+  getJobOfferById(id) {
+    return apiClient.get(`/offer/${id}`);
   },
 
   // Administrator Authentication
@@ -58,3 +64,17 @@ export default {
     return apiClient.get("/user");
   },
 };
+
+//Add token to request if exist
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = store.getters.isAuthenticated ? store.state.token : null;
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);

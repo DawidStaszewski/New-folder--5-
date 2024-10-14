@@ -47,7 +47,7 @@
 
 <script>
 import api from '../services/api';
-
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
@@ -57,22 +57,40 @@ export default {
     };
   },
   methods: {
-    login() {
+    ...mapActions(['setUser']),
+    async login() {
       const loginData = {
         email: this.email,
         password: this.password,
       };
 
-      api.studentLogin(loginData)
-        .then(response => {
-          console.log('Login successful', response.data);
-          // Handle successful login, e.g., store token, redirect
-          this.$router.push('/StudentForm');
-        })
-        .catch(error => {
-          console.error('Login failed', error);
-          this.error = 'Login failed. Please check your credentials.';
-        });
+      try {
+        const response = await api.studentLogin(loginData);
+        const { token, role } = response.data;
+        console.log('Login successful', response.data);
+
+        // Save token and user role to Vuex store
+        this.setUser({ token, role });
+        localStorage.setItem('token', token);
+        localStorage.setItem("role", role); 
+        // Redirect based on role
+        switch (role) {
+          case 1: // Student
+            this.$router.push('/student/quiz');
+            break;
+          case 2: // Employer
+            this.$router.push('/EmployerDashboard');
+            break;
+          case 4: // Administrator
+            this.$router.push('/AdminDashboard');
+            break;
+          default:
+            this.error = 'Invalid role. Please try again.';
+        }
+      } catch (error) {
+        console.error('Login failed', error);
+        this.error = 'Login failed. Please check your credentials.';
+      }
     },
   },
 };
