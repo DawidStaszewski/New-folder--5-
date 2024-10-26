@@ -33,7 +33,7 @@ const fetchOffers = async () => {
     try {
         const response = await axios.get('http://localhost:8080/api/offer/list')
         console.log('Response data:', response.data)
-        offers.value = response.data.data || []
+        offers.value = response.data || []
         console.log('Offers.value:', offers.value)
     } catch (err) {
         console.error('Błąd podczas pobierania ofert', err)

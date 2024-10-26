@@ -21,11 +21,7 @@ import MainSearch from '../components/MainSearch.vue'
                 <div class="py-3 px-3">Jakiś text tu będzie menu?</div>
                 <div class="flex flex-col  gap-y-3 px-3 py-3">
                     <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Mój Profil</div>
-                    <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Przeglądaj materiały
-                        edukacyjne
-                    </div>
-                    <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Quizz</div>
-                    <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Ustawienia</div>
+                    <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Edycja Profilu</div>
                 </div>
             </div>
 
@@ -40,15 +36,6 @@ import MainSearch from '../components/MainSearch.vue'
                             <div class="px-16 block uppercase tracking-wide text-white-700 text-xs font-bold mb-2">
                                 Pobrane skądś imie i nazwisko
                             </div>
-                            <div class="px-16 block uppercase tracking-wide text-white-700 text-xs font-bold mb-2">
-                                Wczytaj CV
-                            </div>
-                            <div class="px-16 block uppercase tracking-wide text-white-700 text-xs font-bold mb-2">
-                                Nazwa Uczelni też skądś pobrana
-                            </div>
-                        </div>
-                        <div class="px-16 block uppercase tracking-wide text-white-700 text-xs font-bold mb-2">
-                            Status Studenta
                         </div>
                     </div>
 
@@ -64,8 +51,7 @@ import MainSearch from '../components/MainSearch.vue'
                         proident, sunt in
                         culpa qui officia deserunt mollit anim id est laborum."
                     </div>
-                    <div class="flex justify-center pt-24 gap-x-2">"Troche nie wiem co tu dodać XD
-                    </div>
+
                     <div class="sm:text-xs font-thin">
                         Wyrażam zgodę na przetwarzanie moich danych osobowych dla potrzeb niezbędnych do realizacji
                         procesu
