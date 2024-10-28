@@ -1,20 +1,34 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import Header from './components/Header.vue'
-import MainSearch from './components/MainSearch.vue'
-import axios from 'axios';
-</script>
 
-
-<template class=" w-screen h-full">
-  <router-view />
+<template>
+  <div class="min-h-screen flex flex-col">
+    <div v-if="isStudentSection" >
+      <Sidebar />
+    </div>
+    <div v-else >
+        <router-view></router-view>
+        <!-- <Sidebar /> -->
+    </div>
+  </div>
 </template>
 
 <script>
+import { RouterLink, RouterView } from 'vue-router'
+import Sidebar from './components/student/Sidebar.vue';
+import StudentHeader from './components/student/StudentHeader.vue';
+import { mapGetters } from "vuex";
+import axios from 'axios';
+
 export default {
   components: {
-    Header
+    Sidebar,
+    StudentHeader
+  },
+  computed: {
+    ...mapGetters(["userRole"]),
+    isStudentSection() {
+      console.log('User Role:', this.userRole);  
+      return this.userRole === "1"; 
+    }
   },
   data() {
     return {
@@ -33,12 +47,8 @@ body {
   width: 100%;
   height: 100%;
   padding: 0;
-  margin: 0;
-}
-
-._main {
-  height: 80vh;
-  display: grid;
-  grid-template-columns: 30% 70%;
+  margin: 0; 
+  background-color: #121212;
+  color: #e0e0e0;
 }
 </style>
