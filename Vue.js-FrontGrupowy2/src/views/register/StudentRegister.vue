@@ -66,6 +66,8 @@ import api from '@/services/api';
         api.studentRegister(registerData)
           .then(response => {
             console.log('Registration successful', response.data);
+            this.$router.push('/login');
+
             // this.$router.push('/StudentDashboard');
           })
           .catch(error => {
