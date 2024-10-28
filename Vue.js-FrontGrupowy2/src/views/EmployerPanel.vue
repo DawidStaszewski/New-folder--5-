@@ -19,13 +19,13 @@ import MainSearch from '../components/MainSearch.vue'
                 <div class="py-3 px-3">Menu</div>
                 <div class="flex flex-col gap-y-3 px-3 py-3">
                     <!-- Użycie router-link do nawigacji -->
-                    <router-link to="/EmployerPannel/new-offer">
+                    <router-link to="/EmployerPanel/new-offer">
                         <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Nowa oferta</div>
                     </router-link>
-                    <router-link to="/EmployerPannel/my-offers">
+                    <router-link to="/EmployerPanel/my-offers">
                         <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Moje Oferty</div>
                     </router-link>
-                    <router-link to="/EmployerPannel/profile">
+                    <router-link to="/EmployerPanel/profile">
                         <div class="_menuItem rounded bg-gray-800 w-full h-full flex justify-center">Mój Profil</div>
                     </router-link>
                 </div>
