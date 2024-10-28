@@ -64,6 +64,7 @@ export default {
             try {
                 let response = await axios.get(`http://localhost:8080/api/admin/employers`);
                 this.questions = response.data.data;
+                this.asyncData();
             } catch (err) {
                 console.error('Bład', err);
             }

@@ -4,7 +4,7 @@
             <div class="w-3/5 bg-gray-500 border rounded-xl p-6">
 
                 <div class="flex flex-col gap-4">
-                    <pre>{{ offers }}</pre>
+
 
                     <div v-for="(offer) in offers" :key="offer.id" class="bg-gray-800 border rounded-xl p-4">
                         <div class="flex justify-between items-center">
@@ -33,7 +33,7 @@ const fetchOffers = async () => {
     try {
         const response = await axios.get('http://localhost:8080/api/offer/list')
         console.log('Response data:', response.data)
-        offers.value = response.data.data || []
+        offers.value = response.data || []
         console.log('Offers.value:', offers.value)
     } catch (err) {
         console.error('Błąd podczas pobierania ofert', err)
