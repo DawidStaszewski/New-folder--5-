@@ -8,10 +8,10 @@ import LoginView from "@/views/LoginView.vue";
 import Login from "@/views/Login.vue";
 import StudentRegister from "@/views/register/StudentRegister.vue";
 import EmployerRegister from "@/views/register/EmployerRegister.vue";
-import AdminPannel from "@/views/AdminPannel.vue";
+import AdminPanel from "@/views/AdminPanel.vue";
 import PKSForm from "@/views/PKSForm.vue";
 import UserBanTemporary from "@/views/UserBanTemporary.vue";
-import EmployerPannel from "@/views/EmployerPannel.vue";
+import EmployerPanel from "@/views/EmployerPanel.vue";
 import NewOffer from "@/views/employer/NewOffer.vue";
 import MyOffers from "@/views/employer/MyOffers.vue";
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -25,22 +25,22 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/EmployerPannel",
-      name: "EmployerPannel",
-      component: EmployerPannel,
+      path: "/EmployerPanel",
+      name: "EmployerPanel",
+      component: EmployerPanel,
       children: [
         {
-          path: "new-offer", // /EmployerPannel/new-offer
+          path: "new-offer", // /EmployerPanel/new-offer
           name: "NewOffer",
           component: NewOffer,
         },
         {
-          path: "my-offers", // /EmployerPannel/my-offers
+          path: "my-offers", // /EmployerPanel/my-offers
           name: "MyOffers",
           component: MyOffers,
         },
         {
-          path: "profile", // /EmployerPannel/profile
+          path: "profile", // /EmployerPanel/profile
           name: "EmployerProfile",
           component: EmployerProfile,
         },
@@ -97,9 +97,9 @@ const router = createRouter({
       component: PKSForm,
     },
     {
-      path: "/AdminPannel",
-      name: "AdminPannel",
-      component: AdminPannel,
+      path: "/AdminPanel",
+      name: "AdminPanel",
+      component: AdminPanel,
     },
     {
       path: "/UserBanTemporary",
