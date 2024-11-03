@@ -33,7 +33,8 @@
               class="mb-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Rejestracja
               Studenta/Absolwenta</router-link>
           </div>
-          <p class="mb-4">Jesteś pracodawcą i szukasz zdolnych absolwentów do swojego zespołu? Zarejestruj się tutaj!</p>
+          <p class="mb-4">Jesteś pracodawcą i szukasz zdolnych absolwentów do swojego zespołu? Zarejestruj się tutaj!
+          </p>
           <div class="flex flex-col">
             <router-link to="/employer/register"
               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Rejestracja
@@ -72,14 +73,14 @@ export default {
         // Save token and user role to Vuex store
         this.setUser({ token, role });
         localStorage.setItem('token', token);
-        localStorage.setItem("role", role); 
+        localStorage.setItem("role", role);
         // Redirect based on role
         switch (role) {
           case 1: // Student
             this.$router.push('/student/quiz');
             break;
           case 2: // Employer
-            this.$router.push('/EmployerDashboard');
+            this.$router.push('/Employer');
             break;
           case 4: // Administrator
             this.$router.push('/AdminDashboard');

@@ -43,7 +43,7 @@ const errorMessage = ref('')
 
 const addOffer = async () => {
     try {
-        await axios.post('http://localhost:8080/api/offer/add', offer.value)
+        await axios.post('/api/offer/add', offer.value)
         successMessage.value = 'Oferta została dodana pomyślnie!'
         errorMessage.value = ''
         // Resetowanie formularza

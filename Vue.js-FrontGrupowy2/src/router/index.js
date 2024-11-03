@@ -1,17 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import Main from "../views/Main.vue";
-import Form from "@/views/Form.vue";
-import StudentForm from "@/views/StudentForm.vue";
-import EmployerForm from "@/views/EmployerForm.vue";
-import LoginView from "@/views/LoginView.vue";
+
 import Login from "@/views/Login.vue";
 import StudentRegister from "@/views/register/StudentRegister.vue";
 import EmployerRegister from "@/views/register/EmployerRegister.vue";
 import AdminPanel from "@/views/AdminPanel.vue";
 import PKSForm from "@/views/PKSForm.vue";
 import UserBanTemporary from "@/views/UserBanTemporary.vue";
-import EmployerPanel from "@/views/EmployerPanel.vue";
 import NewOffer from "@/views/employer/NewOffer.vue";
 import MyOffers from "@/views/employer/MyOffers.vue";
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
@@ -26,35 +20,25 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: Login,
+    },
+
+    {
+      path: "/employer/new-offer",
+      name: "NewOffer",
+      component: NewOffer,
     },
     {
-      path: "/EmployerPanel",
-      name: "EmployerPanel",
-      component: EmployerPanel,
-      children: [
-        {
-          path: "new-offer", // /EmployerPanel/new-offer
-          name: "NewOffer",
-          component: NewOffer,
-        },
-        {
-          path: "my-offers", // /EmployerPanel/my-offers
-          name: "MyOffers",
-          component: MyOffers,
-        },
-        {
-          path: "profile", // /EmployerPanel/profile
-          name: "EmployerProfile",
-          component: EmployerProfile,
-        },
-      ],
+      path: "/employer/my-offers",
+      name: "MyOffers",
+      component: MyOffers,
     },
     {
-      path: "/LoginView",
-      name: "LoginView",
-      component: LoginView,
+      path: "/employer",
+      name: "EmployerProfile",
+      component: EmployerProfile,
     },
+
     {
       path: "/student/register",
       name: "StudentRegister",
@@ -65,36 +49,13 @@ const router = createRouter({
       name: "EmployerRegister",
       component: EmployerRegister,
     },
-    {
-      path: "/LoginView",
-      name: "LoginView",
-      component: LoginView,
-    },
+
     {
       path: "/Login",
       name: "Login",
       component: Login,
     },
-    {
-      path: "/Main",
-      name: "Main",
-      component: Main,
-    },
-    {
-      path: "/Form",
-      name: "Form",
-      component: Form,
-    },
-    {
-      path: "/StudentForm",
-      name: "StudentForm",
-      component: StudentForm,
-    },
-    {
-      path: "/EmployerForm",
-      name: "EmployerForm",
-      component: EmployerForm,
-    },
+
     {
       path: "/PKSForm",
       name: "PKSForm",

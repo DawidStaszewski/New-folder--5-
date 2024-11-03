@@ -62,7 +62,7 @@ export default {
     methods: {
         async asyncData() {
             try {
-                let response = await axios.get(`http://localhost:8080/api/admin/employers`);
+                let response = await axios.get(`/api/admin/employers`);
                 this.questions = response.data.data;
                 this.asyncData();
             } catch (err) {
@@ -71,7 +71,7 @@ export default {
         },
         async addToBlacklist(userId) {
             try {
-                await axios.post(`http://localhost:8080/api/admin/blacklist/${userId}`);
+                await axios.post(`/api/admin/blacklist/${userId}`);
                 console.log(`Blacklist ${userId}`);
                 this.questions = this.questions.filter(cat => cat.id !== userId);
                 this.asyncData();
@@ -81,7 +81,7 @@ export default {
         },
         async verifyEmployer(employerId) {
             try {
-                await axios.patch(`http://localhost:8080/api/admin/employers/${employerId}`, {
+                await axios.patch(`/api/admin/employers/${employerId}`, {
                     verified: true
                 });
                 console.log(`Employer ${employerId} verified`);

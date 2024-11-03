@@ -62,7 +62,7 @@ export default {
                 let Toster = []
 
 
-                let response = await axios.get(`https://valorant-api.com/v1/agents`)
+                let response = await axios.get(`/api/admin/employers`)
                 Toster.push(...response.data.data)
 
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "@/store";
+axios.defaults.baseURL = "http://localhost:8080/";
 const apiClient = axios.create({
   baseURL: "http://localhost:8080/api", // Adjust the base URL to match your Laravel API URL
   withCredentials: true, // Include credentials for CSRF protection if necessary
@@ -39,7 +40,7 @@ export default {
 
   // Pracodawca Authentication
   pracodawcaRegister(data) {
-    return apiClient.post("/pracodawca/register", data);
+    return apiClient.post("/register", data);
   },
   pracodawcaLogin(data) {
     return apiClient.post("/pracodawca/login", data);
