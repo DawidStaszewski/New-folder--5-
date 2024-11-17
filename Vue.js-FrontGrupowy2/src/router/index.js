@@ -12,7 +12,8 @@ import EmployerProfile from "@/views/employer/EmployerProfile.vue";
 import QuizPage from "@/views/student/QuizPage.vue";
 import EducationalMaterials from "@/views/student/EducationalMaterials.vue";
 import JobOffers from "@/views/student/JobOffers.vue";
-import ProfilePage from "@/views/student/ProfilePage.vue";
+import StudentProfilePage from "@/views/student/StudentProfilePage.vue";
+import EmployerProfilePage from "@/views/employer/EmployerProfilePage.vue";
 import JobOfferDetails from "@/views/student/JobOfferDetails.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,9 +35,14 @@ const router = createRouter({
       component: MyOffers,
     },
     {
+      path: "/employer/profile",
+      name: "ProfilePage",
+      component: EmployerProfilePage,
+    },
+    {
       path: "/employer",
-      name: "EmployerProfile",
-      component: EmployerProfile,
+      name: "EmployerProfilePage",
+      component: EmployerProfilePage,
     },
 
     {
@@ -111,8 +117,8 @@ const router = createRouter({
     },
     {
       path: "/student/profile",
-      name: "ProfilePage",
-      component: ProfilePage,
+      name: "StudentProfilePage",
+      component: StudentProfilePage,
       // meta: { requiresAuth: true, roles: [1] },
     },
   ],

@@ -14,7 +14,7 @@ export default {
     return apiClient.get("/user/me");
   },
   UpdateUser(data) {
-    return apiClient.patch("/student/edit/6", data);
+    return apiClient.patch("/student/edit", data);
   },
   // Student Authentication
   studentRegister(data) {

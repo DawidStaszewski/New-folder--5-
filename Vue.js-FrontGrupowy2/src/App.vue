@@ -3,7 +3,7 @@
     <div v-if="isStudentSection">
       <StudentSidebar />
     </div>
-    <div v-if="isEmployerSection">
+    <div v-else-if="isEmployerSection">
       <EmployerSidebar />
     </div>
     <div v-else>
