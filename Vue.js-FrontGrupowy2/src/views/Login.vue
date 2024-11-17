@@ -77,7 +77,7 @@ export default {
         // Redirect based on role
         switch (role) {
           case 1: // Student
-            this.$router.push('/student/quiz');
+            this.$router.push('/student/ProfilePage');
             break;
           case 2: // Employer
             this.$router.push('/Employer');

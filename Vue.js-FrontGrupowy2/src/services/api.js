@@ -10,6 +10,12 @@ const apiClient = axios.create({
 });
 
 export default {
+  getUser() {
+    return apiClient.get("/user/me");
+  },
+  UpdateUser(data) {
+    return apiClient.patch("/student/edit/6", data);
+  },
   // Student Authentication
   studentRegister(data) {
     return apiClient.post("/register", data);
@@ -58,11 +64,6 @@ export default {
   },
   getPracownikBiuraKarierMe() {
     return apiClient.get("/pracownikbiurakarier/me");
-  },
-
-  // General User Authentication
-  getUser() {
-    return apiClient.get("/user");
   },
 };
 

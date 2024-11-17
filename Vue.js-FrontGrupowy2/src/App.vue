@@ -18,6 +18,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import StudentSidebar from './components/student/StudentSidebar.vue';
 import EmployerSidebar from './components/employer/EmployerSidebar.vue';
 import StudentHeader from './components/student/StudentHeader.vue';
+import EmployerHeader from './components/employer/EmployerHeader.vue';
 import { mapGetters } from "vuex";
 import axios from 'axios';
 
@@ -25,7 +26,8 @@ export default {
   components: {
     StudentSidebar,
     StudentHeader,
-    EmployerSidebar
+    EmployerSidebar,
+    EmployerHeader
   },
   computed: {
     ...mapGetters(["userRole"]),
