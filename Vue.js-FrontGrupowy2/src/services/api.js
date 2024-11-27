@@ -29,6 +29,9 @@ export default {
   getJobOffers() {
     return apiClient.get("/offer/list");
   },
+  getJobOffersByCompetence(competenceId) {
+    return apiClient.get(`/offer/competence/${competenceId}`);
+  },
   getJobOfferById(id) {
     return apiClient.get(`/offer/${id}`);
   },
@@ -64,6 +67,9 @@ export default {
   },
   getPracownikBiuraKarierMe() {
     return apiClient.get("/pracownikbiurakarier/me");
+  },
+  getCompetenceList() {
+    return apiClient.get("/competence/list");
   },
 };
 
