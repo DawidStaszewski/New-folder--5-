@@ -26,12 +26,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import api from '@/services/api';
 
 const offers = ref([])
 
 const fetchOffers = async () => {
     try {
-        const response = await axios.get('/api/offer/list')
+        const response = await api.myOffers();
         console.log('Response data:', response.data)
         offers.value = response.data || []
         console.log('Offers.value:', offers.value)

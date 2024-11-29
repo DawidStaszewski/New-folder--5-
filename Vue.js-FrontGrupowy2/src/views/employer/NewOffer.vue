@@ -30,9 +30,10 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import api from '@/services/api';
 
 const offer = ref({
-    employer_id: 1,
+
     title: '',
     description: '',
     expiration_date: '',
@@ -43,11 +44,11 @@ const errorMessage = ref('')
 
 const addOffer = async () => {
     try {
-        await axios.post('/api/offer/add', offer.value)
+        await api.createOffer(offer.value);
         successMessage.value = 'Oferta została dodana pomyślnie!'
         errorMessage.value = ''
         // Resetowanie formularza
-        offer.value = { employer_id: 1, title: '', description: '', expiration_date: '' }
+        offer.value = { title: '', description: '', expiration_date: '' }
     } catch (err) {
         errorMessage.value = 'Błąd podczas dodawania oferty. Spróbuj ponownie.'
         successMessage.value = ''

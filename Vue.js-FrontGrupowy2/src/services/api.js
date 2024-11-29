@@ -13,6 +13,12 @@ export default {
   getUser() {
     return apiClient.get("/user/me");
   },
+  createOffer(offer) {
+    return apiClient.post("/offer/add", offer);
+  },
+  myOffers() {
+    return apiClient.get("/employer/my_offers");
+  },
   UpdateUser(data) {
     return apiClient.patch("/student/edit", data);
   },
