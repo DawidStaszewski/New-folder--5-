@@ -15,6 +15,13 @@ import JobOffers from "@/views/student/JobOffers.vue";
 import StudentProfilePage from "@/views/student/StudentProfilePage.vue";
 import EmployerProfilePage from "@/views/employer/EmployerProfilePage.vue";
 import JobOfferDetails from "@/views/student/JobOfferDetails.vue";
+import EducationalMaterialDetail from "@/views/student/EducationalMaterialDetail.vue";
+import EmployersList from "@/views/admin/EmployersList.vue";
+import AdminCreateUser from "@/views/admin/AdminCreateUser.vue";
+import UserList from "@/views/admin/UserList.vue";
+import CareerOfficeMaterials from "@/views/career_office/CareerOfficeMaterials.vue";
+import MaterialDetail from "@/views/career_office/MaterialDetail.vue";
+import AddMaterial from "@/views/career_office/AddMaterial.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -77,6 +84,33 @@ const router = createRouter({
       // },
     },
     {
+      path: "/admin/employer-verification",
+      name: "EmployersList",
+      component: EmployersList,
+      // meta: {
+      //   requiresAuth: true,
+      //   roles: [4],
+      // },
+    },
+    {
+      path: "/admin/user-list",
+      name: "UserList",
+      component: UserList,
+      // meta: {
+      //   requiresAuth: true,
+      //   roles: [4],
+      // },
+    },
+    {
+      path: "/admin/create-user",
+      name: "AdminCreateUser",
+      component: AdminCreateUser,
+      // meta: {
+      //   requiresAuth: true,
+      //   roles: [4],
+      // },
+    },
+    {
       path: "/UserBanTemporary",
       name: "UserBanTemporary",
       component: UserBanTemporary,
@@ -103,6 +137,12 @@ const router = createRouter({
       // meta: { requiresAuth: true, roles: [1] },
     },
     {
+      path: "/student/educational-materials/:id",
+      name: "EducationalMaterialDetail",
+      component: EducationalMaterialDetail,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
       path: "/student/job-offers",
       name: "JobOffers",
       component: JobOffers,
@@ -119,6 +159,24 @@ const router = createRouter({
       path: "/student/profile",
       name: "StudentProfilePage",
       component: StudentProfilePage,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/career-office/my-materials",
+      name: "CareerOfficeMaterials",
+      component: CareerOfficeMaterials,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/career-office/add-material",
+      name: "AddMaterial",
+      component: AddMaterial,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/career-office/my-materials/:id",
+      name: "MaterialDetail",
+      component: MaterialDetail,
       // meta: { requiresAuth: true, roles: [1] },
     },
   ],

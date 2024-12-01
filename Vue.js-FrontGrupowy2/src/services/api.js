@@ -1,7 +1,7 @@
 import axios from "axios";
 import store from "@/store";
 axios.defaults.baseURL = "http://localhost:8080/";
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: "http://localhost:8080/api", // Adjust the base URL to match your Laravel API URL
   withCredentials: true, // Include credentials for CSRF protection if necessary
   headers: {
@@ -12,6 +12,12 @@ const apiClient = axios.create({
 export default {
   getUser() {
     return apiClient.get("/user/me");
+  },
+  getEducationalMaterials() {
+    return apiClient.get("/education_materials/all");
+  },
+  getEducationalMaterial(id) {
+    return apiClient.get(`/education_materials/${id}`);
   },
   UpdateUser(data) {
     return apiClient.patch("/student/edit", data);
