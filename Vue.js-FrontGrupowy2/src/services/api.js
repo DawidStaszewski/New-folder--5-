@@ -19,6 +19,12 @@ export default {
   getEducationalMaterial(id) {
     return apiClient.get(`/education_materials/${id}`);
   },
+  createOffer(offer) {
+    return apiClient.post("/offer/add", offer);
+  },
+  myOffers() {
+    return apiClient.get("/employer/my_offers");
+  },
   UpdateUser(data) {
     return apiClient.patch("/student/edit", data);
   },
