@@ -5,15 +5,15 @@
         <h2 class="text-xl font-bold mb-6">Rejestracja Studenta</h2>
         <form @submit.prevent="register">
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 text-left" for="email">Email:</label>
+            <label class="block text-sm font-medium text-white text-left" for="email">Email:</label>
             <input v-model="email" type="email" id="email"
-              class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500 text-black"
               placeholder="Podaj swój email" required>
           </div>
           <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 text-left" for="password">Hasło:</label>
+            <label class="block text-sm font-medium text-white text-left" for="password">Hasło:</label>
             <input v-model="password" type="password" id="password"
-              class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500 text-black"
               placeholder="Podaj swoje hasło" required>
           </div>
           <button 
