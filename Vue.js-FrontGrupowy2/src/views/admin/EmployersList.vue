@@ -16,9 +16,9 @@
         class="bg-gray-800 p-6 rounded-lg shadow-lg"
       >
         <h3 class="text-xl font-semibold text-indigo-400 mb-4">
-          {{ employer.company_name || "Nieznana Firma" }}
+          {{ employer.companyname || "Nieznana Firma" }}
         </h3>
-        <p class="text-gray-300 mb-2"><strong>KRS:</strong> {{ employer.krs_number || "Brak danych" }}</p>
+        <p class="text-gray-300 mb-2"><strong>KRS:</strong> {{ employer.krsnumber || "Brak danych" }}</p>
         <p class="text-gray-300 mb-4">
           <strong>Email:</strong>
           {{ employer.user?.email || "Brak danych" }}

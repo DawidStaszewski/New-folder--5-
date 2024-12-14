@@ -38,8 +38,8 @@
 
       <div class="py-6">
         <h4 class="text-lg font-semibold text-gray-300 mb-4">Dane pracodawcy:</h4>
-        <p><strong class="text-gray-400">Nazwa:</strong> {{ jobOffer.employer.company_name }}</p>
-        <p><strong class="text-gray-400">KRS:</strong> {{ jobOffer.employer.krs_number }}</p>
+        <p><strong class="text-gray-400">Nazwa:</strong> {{ jobOffer.employer.companyname }}</p>
+        <p><strong class="text-gray-400">KRS:</strong> {{ jobOffer.employer.krsnumber }}</p>
         <p v-if="jobOffer.employer.verified === '1'" class="text-green-400 font-semibold">
           (Zweryfikowany pracodawca)
         </p>
