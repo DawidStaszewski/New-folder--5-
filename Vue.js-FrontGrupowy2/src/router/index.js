@@ -22,6 +22,7 @@ import UserList from "@/views/admin/UserList.vue";
 import CareerOfficeMaterials from "@/views/career_office/CareerOfficeMaterials.vue";
 import MaterialDetail from "@/views/career_office/MaterialDetail.vue";
 import AddMaterial from "@/views/career_office/AddMaterial.vue";
+import QuizPageTest from "@/views/student/QuizPageTest.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -178,6 +179,11 @@ const router = createRouter({
       name: "MaterialDetail",
       component: MaterialDetail,
       // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/student/quiz/test",
+      name: "QuizPageTest",
+      component: QuizPageTest,
     },
   ],
 });
