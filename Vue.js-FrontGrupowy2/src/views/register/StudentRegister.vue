@@ -16,12 +16,6 @@
               class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="Podaj swoje hasło" required>
           </div>
-          <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 text-left" for="indexnumber">Numer indeksu:</label>
-            <input v-model="indexnumber" type="text" id="indexnumber"
-              class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Podaj numer indeksu" required>
-          </div>
           <button 
             type="submit" 
             class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center"
