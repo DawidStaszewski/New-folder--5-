@@ -5,13 +5,16 @@ export const apiClient = axios.create({
   baseURL: "http://localhost:8080/api", // Adjust the base URL to match your Laravel API URL
   withCredentials: true, // Include credentials for CSRF protection if necessary
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json; charset=utf-8",
   },
 });
 
 export default {
   getUser() {
     return apiClient.get("/user/me");
+  },
+  getQuizResults(studentId) {
+    return apiClient.get(`/quiz/results/career-path/${studentId}`);
   },
   getEducationalMaterials() {
     return apiClient.get("/education_materials/all");
@@ -37,6 +40,9 @@ export default {
   },
   getStudentMe() {
     return apiClient.get("/student/me");
+  },
+  submitQuizResults(data) {
+    return apiClient.post("/quiz/results", data); // Endpoint do wysyłania wyników quizu
   },
   getJobOffers() {
     return apiClient.get("/offer/list");
