@@ -48,7 +48,7 @@
 
           <div class="mb-4 flex items-center">
             <span class="text-gray-400 font-semibold mr-2">Pracodawca:</span>
-            <span>{{ offer.employer.company_name }}</span>
+            <span>{{ offer.employer.companyname }}</span>
             <span
               v-if="offer.employer.verified === '1'"
               class="ml-2 text-sm text-green-400 font-bold"
@@ -115,7 +115,7 @@ export default {
         const search = this.searchText.toLowerCase();
         const titleMatch = offer.title.toLowerCase().includes(search);
         const descriptionMatch = offer.description.toLowerCase().includes(search);
-        const employerMatch = offer.employer.company_name.toLowerCase().includes(search);
+        const employerMatch = offer.employer.companyname.toLowerCase().includes(search);
         const competenceMatch = offer.competences.some((competence) =>
           competence.name.toLowerCase().includes(search)
         );
