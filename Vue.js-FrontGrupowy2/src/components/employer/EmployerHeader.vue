@@ -30,7 +30,7 @@ export default {
         console.log('Response data:', response.data)
 
         // Aktualizacja reaktywnej zmiennej
-        employerName.value = response.data.user?.data?.name || response.data.user?.email || 'Nieznane imię'
+        employerName.value = response.data.user?.data?.companyname || response.data.user?.email || 'Nieznane imię'
         console.log('Employer name:', employerName.value)
       } catch (err) {
         console.error('Błąd podczas pobierania danych użytkownika', err)
