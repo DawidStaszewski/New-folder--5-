@@ -22,6 +22,9 @@ export default {
   UpdateUser(data) {
     return apiClient.patch("/student/edit", data);
   },
+  UpdateEmployer(data) {
+    return apiClient.patch("/student/edit", data);
+  },
   // Student Authentication
   studentRegister(data) {
     return apiClient.post("/register", data);

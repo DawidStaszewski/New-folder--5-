@@ -3,7 +3,7 @@
         <!-- Sidebar -->
         <div :class="['bg-custom-dark-gray text-white p-6 flex flex-col shadow-lg', isMobile ? 'w-full' : 'lg:w-64']">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-semibold tracking-wide">Panel Studenta</h2>
+                <h2 class="text-2xl font-semibold tracking-wide">Panel Pracodawcy</h2>
             </div>
 
             <nav class="space-y-4">
