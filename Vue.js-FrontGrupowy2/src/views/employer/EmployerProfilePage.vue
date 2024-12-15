@@ -1,84 +1,90 @@
 <template>
-  <div class="p-8">
-    <h2 class="text-xl font-bold mb-4">Profil Pracodawcy</h2>
-    <div class="mb-6">
-      <p class="text-lg"><strong>Opis:</strong> {{ fetchedProfile.description }}</p>
+  <div class="p-8 bg-gray-900 text-white min-h-screen">
+    <h2 class="text-3xl font-bold mb-8 text-center text-indigo-400">Profil Pracodawcy</h2>
+    <div v-if="isLoading" class="flex justify-center items-center mb-10">
+      <div class="loader"></div>
     </div>
-
-    <h3 class="text-lg font-semibold mb-4">Zaktualizuj Dane</h3>
-    <form @submit.prevent="updateProfile">
-
-      <div class="mb-4">
-        <label for="description" class="block text-sm font-medium mb-2">Opis</label>
-        <textarea v-model="formProfile.description" id="description" class="p-2 w-full bg-gray-700 rounded"
-          rows="4"></textarea>
+    <div v-else>
+      <div class="mb-10 bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold mb-4 text-gray-300">Opis</h3>
+        <p class="text-lg">{{ fetchedProfile.description }}</p>
       </div>
 
-      <button type="submit" class="p-2 bg-indigo-600 rounded hover:bg-indigo-700">
-        Zapisz Zmiany
-      </button>
-    </form>
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold mb-4 text-gray-300">Zaktualizuj Dane</h3>
+        <form @submit.prevent="updateProfile">
+          <div class="mb-6">
+            <label for="description" class="block text-sm font-medium mb-2">Opis</label>
+            <textarea v-model="formProfile.description" id="description"
+              class="p-3 w-full bg-gray-700 rounded focus:ring-2 focus:ring-indigo-400 outline-none"
+              rows="4"></textarea>
+          </div>
+          <button type="submit" :disabled="isSubmitting"
+            class="p-3 w-full bg-indigo-600 rounded hover:bg-indigo-700 text-white font-semibold transition-all flex justify-center items-center">
+            <span v-if="isSubmitting" class="loader-button mr-2"></span>
+            {{ isSubmitting ? "Zapisywanie..." : "Zapisz Zmiany" }}
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { reactive, onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import api from "@/services/api";
 
 export default {
   name: "EmployerProfile",
   setup() {
-    // Przechowuje dane z backendu do wyświetlenia
     const fetchedProfile = reactive({
-
       description: "",
     });
 
-    // Formularz edycji danych
     const formProfile = reactive({
-
       description: "",
     });
 
-    // Pobiera dane z backendu
-    const fetchStudentProfile = async () => {
+    const isLoading = ref(true);
+    const isSubmitting = ref(false);
+
+    const fetchEmployerProfile = async () => {
       try {
         const response = await api.getUser();
         const data = response.data.user.data;
 
         fetchedProfile.description = data.description || "";
-
         formProfile.description = fetchedProfile.description;
-
-        console.log("Pobrano dane profilu:", fetchedProfile);
       } catch (error) {
-        console.error("Błąd podczas pobierania danych studenta:", error);
+        console.error("Błąd podczas pobierania danych pracodawcy:", error);
+      } finally {
+        isLoading.value = false;
       }
     };
 
-    // Aktualizuje dane w backendzie
     const updateProfile = async () => {
+      isSubmitting.value = true;
       try {
-        const response = await api.UpdateEmployer({
+        await api.UpdateEmployer({
           description: formProfile.description,
         });
-
-        // Odświeża dane z backendu po udanej aktualizacji
-        await fetchStudentProfile();
-
-        console.log("Profil zaktualizowany:", response.data);
+        await fetchEmployerProfile();
         alert("Profil został zaktualizowany pomyślnie!");
       } catch (error) {
         console.error("Błąd podczas aktualizacji danych pracodawcy:", error);
         alert("Wystąpił błąd podczas aktualizacji profilu.");
+      } finally {
+        isSubmitting.value = false;
       }
     };
 
-    onMounted(fetchStudentProfile);
+    onMounted(fetchEmployerProfile);
 
     return {
       fetchedProfile,
       formProfile,
+      isLoading,
+      isSubmitting,
       updateProfile,
     };
   },
@@ -86,8 +92,47 @@ export default {
 </script>
 
 <style scoped>
-body {
-  background-color: #121212;
-  color: #e0e0e0;
+.loader {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid white;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+.loader-button {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 2px solid white;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(75, 85, 99, 0.2);
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+  outline: none;
+}
+
+h2,
+h3 {
+  color: #a5b4fc;
 }
 </style>

@@ -26,7 +26,7 @@
                     </svg>
                     <span class="font-medium">Moje Oferty</span>
                 </router-link>
-                <router-link to="/employer/my-offers"
+                <router-link to="/employer/JobOffersEmployer"
                     class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-300" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
