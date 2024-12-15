@@ -3,11 +3,12 @@ import { RouterLink, RouterView } from 'vue-router'
 import Header from '../components/Header.vue'
 import axios from 'axios';
 import MainSearch from '../components/MainSearch.vue'
+import { apiClient } from '@/services/api';
 </script>
 
 <template class=" w-screen h-full ">
     <div>
-        <Header></Header>
+        <!-- <Header></Header> -->
         <div class="flex items-center justify-center py-20 ">
             <div class="_imain w-3/5 flex items-center justify-center bg-gray-500 border rounded-xl">
                 <div class="flex flex-col gap-y-3 px-3 py-3 ">
@@ -62,7 +63,7 @@ export default {
     methods: {
         async asyncData() {
             try {
-                let response = await axios.get(`/api/admin/employers`);
+                let response = await apiClient.get(`/admin/employers`);
                 this.questions = response.data.data;
                 this.asyncData();
             } catch (err) {
@@ -71,7 +72,7 @@ export default {
         },
         async addToBlacklist(userId) {
             try {
-                await axios.post(`/api/admin/blacklist/${userId}`);
+                await apiClient.post(`/admin/blacklist/${userId}`);
                 console.log(`Blacklist ${userId}`);
                 this.questions = this.questions.filter(cat => cat.id !== userId);
                 this.asyncData();
@@ -81,8 +82,8 @@ export default {
         },
         async verifyEmployer(employerId) {
             try {
-                await axios.patch(`/api/admin/employers/${employerId}`, {
-                    verified: true
+                await apiClient.patch(`/admin/employers/${employerId}`, {
+                    verified: 1
                 });
                 console.log(`Employer ${employerId} verified`);
                 this.asyncData();

@@ -9,13 +9,15 @@ export default createStore({
   mutations: {
     setUser(state, payload) {
       state.token = payload.token;
-      state.role = payload.role;
+      state.role = String(payload.role);
       localStorage.setItem("token", payload.token);
       localStorage.setItem("role", payload.role);
     },
     logout(state) {
-      state.token = "";
+      state.token = null;
       state.role = null;
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
     },
   },
   actions: {
@@ -23,9 +25,14 @@ export default createStore({
       commit("setUser", user);
     },
     logout({ commit }) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
       commit("logout");
+    },
+    initializeStore({ commit }) {
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+      if (token && role) {
+        commit("setUser", { token, role: parseInt(role) });
+      }
     },
   },
   getters: {
