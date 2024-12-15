@@ -4,7 +4,11 @@
     <!-- User Information -->
     <div class="flex items-center space-x-4">
       <div>
+
+        <p class="text-lg font-semibold">Jan Kowalski</p>
+
         <p class="text-lg font-semibold">{{ employerName }}</p>
+
         <p class="text-sm text-gray-400">Pracodawca</p>
       </div>
     </div>
