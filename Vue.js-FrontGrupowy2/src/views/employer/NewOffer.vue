@@ -1,174 +1,265 @@
 <template>
-<<<<<<< HEAD
-    <div class="text-black">
-        <div class="flex items-center justify-center py-20">
-            <div class="w-3/5 bg-gray-500 border rounded-xl p-6">
-                <h2 class="text-center text-2xl mb-4 text-white">Dodaj nową Ofertę</h2>
-                <form @submit.prevent="addOffer">
-                    <div class="mb-4">
-                        <label for="title" class="block text-white">Tytuł:</label>
-                        <input v-model="offer.title" id="title" type="text" class="w-full p-2 border" required />
-                    </div>
-                    <div class="mb-4">
-                        <label for="description" class="block text-white">Opis:</label>
-                        <textarea v-model="offer.description" id="description" class="w-full p-2 border" required></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="expiration_date" class="block text-white">Data:</label>
-                        <input v-model="offer.expiration_date" id="expiration_date" type="date" class="w-full p-2 border" required />
-                    </div>
-                    <div class="mb-4">
-                        <label for="offer_type" class="block text-center mb-2 text-white">Typ oferty:</label>
-                        <div class="flex justify-center">
-                            <div 
-                            v-for="(type, index) in offerTypes" 
-                            :key="type.id" 
-                            class="mr-4 mb-2">
-                                <input 
-                                type="radio" 
-                                :id="'offer_type_' + type.id" 
-                                v-model="offer.type" 
-                                :value="type.id" 
-                                class="hidden"
-                                />
-                                <label 
-                                    :for="'offer_type_' + type.id" 
-                                    :class="[
-                                        'p-3 px-6 rounded-full cursor-pointer text-center transition duration-200',
-                                        offer.type === type.id ? 'bg-blue-900 text-white' : 'bg-gray-200'
-                                    ]">
-                                    {{ type.name }}
-                                </label>
-                            </div>
-=======
     <div class="p-8 bg-gray-900 text-white min-h-screen">
-        <!-- Nagłówek strony -->
-        <h2 class="text-2xl font-bold text-blue-400 text-center mb-6">Dodaj Nową Ofertę</h2>
-
-        <div class="max-w-3xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
-            <form @submit.prevent="addOffer">
-                <!-- Pole: Tytuł -->
-                <div class="mb-6">
-                    <label for="title" class="block text-sm font-medium text-gray-300 mb-2">Tytuł:</label>
-                    <input v-model="offer.title" id="title" type="text"
-                        class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        placeholder="Wprowadź tytuł oferty" required />
-                </div>
-
-                <!-- Pole: Opis -->
-                <div class="mb-6">
-                    <label for="description" class="block text-sm font-medium text-gray-300 mb-2">Opis:</label>
-                    <textarea v-model="offer.description" id="description" rows="4"
-                        class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        placeholder="Opisz szczegóły oferty" required></textarea>
-                </div>
-
-                <!-- Pole: Data wygaśnięcia -->
-                <div class="mb-6">
-                    <label for="expiration_date" class="block text-sm font-medium text-gray-300 mb-2">Data
-                        wygaśnięcia:</label>
-                    <input v-model="offer.expiration_date" id="expiration_date" type="date"
-                        class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                        required />
-                </div>
-
-                <!-- Wybór typu oferty -->
-                <div class="mb-6">
-                    <label for="offer_type" class="block text-sm font-medium text-gray-300 mb-4">Typ oferty:</label>
-                    <div class="flex flex-wrap gap-4">
-                        <div v-for="type in offerTypes" :key="type.id" class="flex items-center">
-                            <input type="radio" :id="'offer_type_' + type.id" v-model="offer.type" :value="type.id"
-                                class="hidden" />
-                            <label :for="'offer_type_' + type.id"
-                                :class="['py-2 px-4 rounded-lg cursor-pointer transition duration-200', offer.type === type.id ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-300']">
-                                {{ type.name }}
-                            </label>
->>>>>>> 3c34c109eeee0dbd06cc8085702fe7955fb949ea
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Przycisk Dodawania -->
-                <div class="text-center">
-                    <button type="submit"
-                        class="w-full py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition duration-200">
-                        Dodaj ofertę
-                    </button>
-                </div>
-
-                <!-- Wiadomości o sukcesie / błędzie -->
-                <p v-if="successMessage" class="text-center text-green-500 mt-4">{{ successMessage }}</p>
-                <p v-if="errorMessage" class="text-center text-red-500 mt-4">{{ errorMessage }}</p>
-            </form>
+  
+      <!-- Sekcja filtracji -->
+      <div class="bg-gray-800 p-4 rounded-lg shadow-lg mb-6">
+        <h3 class="text-lg font-semibold text-gray-300 mb-4">Filtruj oferty</h3>
+        <div class="flex flex-wrap justify-start gap-4">
+          <div class="w-64">
+            <label for="type" class="block text-sm font-medium mb-2">Wymiar:</label>
+            <select
+              id="type"
+              v-model="selectedType"
+              @change="fetchJobOffersByType"
+              class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-full"
+            >
+              <option value="" selected>Wszystkie wymiary</option>
+              <option v-for="type in types" :key="type.id" :value="type.id">
+                {{ type.name }}
+              </option>
+            </select>
+          </div>
+          <div class="w-64">
+            <label for="category" class="block text-sm font-medium mb-2">Kategoria:</label>
+            <select
+              id="category"
+              v-model="selectedCategory"
+              @change="fetchJobOffersByCategory"
+              class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-full"
+            >
+              <option value="" selected>Wszystkie kategorie</option>
+              <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+  
+          <div class="w-64">
+            <label for="searchText" class="block text-sm font-medium mb-2">Szukaj:</label>
+            <input
+              id="searchText"
+              v-model="searchText"
+              type="text"
+              placeholder="Nazwa, opis, pracodawca, kompetencje..."
+              class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-full"
+            />
+          </div>
         </div>
+      </div>
+  
+      <div v-if="isLoading" class="flex justify-center items-center">
+        <div class="loader"></div>
+      </div>
+  
+      <div v-else-if="filteredJobOffers.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          v-for="offer in filteredJobOffers"
+          :key="offer.id"
+          class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform"
+        >
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-4 text-blue-400">{{ offer.title }}</h3>
+  
+            <div class="mb-4 flex items-center">
+              <span class="text-gray-400 font-semibold mr-2">Pracodawca:</span>
+              <span>{{ offer.employer.companyname }}</span>
+              <span
+                v-if="offer.employer.verified === '1'"
+                class="ml-2 text-sm text-green-400 font-bold"
+              >
+                (Zweryfikowany)
+              </span>
+            </div>
+  
+            <div class="mb-4">
+              <p class="text-gray-300 text-sm">
+                {{ offer.description.length > 150 ? offer.description.slice(0, 150) + '...' : offer.description }}
+              </p>
+            </div>
+            <div class="mb-4">
+              <strong class="block text-gray-400 mb-2">Wymiar:</strong>
+              <div class="flex flex-wrap gap-2"> 
+              <span
+                class="inline-block bg-green-900 text-white px-3 py-1 rounded-full text-xs"
+              >
+              {{ offer.offer_type.name }}
+              </span>
+              </div>
+            </div>
+  
+            <div class="mb-4">
+              <strong class="block text-gray-400 mb-2">Wymagane kompetencje:</strong>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  v-for="competence in offer.competences"
+                  :key="competence.id"
+                  class="inline-block bg-blue-700 text-white px-3 py-1 rounded-full text-xs"
+                >
+                  {{ competence.name }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-700 flex items-center justify-between">
+            <span class="text-sm text-gray-400">
+              Wygasa: {{ new Date(offer.expiration_date).toLocaleDateString() }}
+            </span>
+            <button
+              @click="viewJobOffer(offer)"
+              class="bg-blue-600 text-white py-1 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Zobacz więcej
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <div v-else class="text-center">
+        <p class="text-gray-500 text-lg">Brak ofert pracy pasujących do Twoich kryteriów.</p>
+      </div>
     </div>
-</template>
-
-<script setup>
-import { ref, onMounted } from "vue";
-import api from "@/services/api";
-
-const offer = ref({
-    title: "",
-    description: "",
-    expiration_date: "",
-    type: "",
-});
-
-const offerTypes = ref([]);
-const successMessage = ref("");
-const errorMessage = ref("");
-
-const fetchOfferTypes = async () => {
-    try {
-        const response = await api.getOfferTypes();
-<<<<<<< HEAD
-        const data = response.data;
-        
-=======
-        console.log("Response data:", response.data); // Log całej odpowiedzi
-
-        const data = response.data.data;
-        console.log("Offer types data:", data); // Loguje tylko część "data"
-
->>>>>>> 3c34c109eeee0dbd06cc8085702fe7955fb949ea
-        if (Array.isArray(data)) {
-            offerTypes.value = data;
-            if (offerTypes.value.length > 0) {
-                offer.value.type = offerTypes.value[0].id;
-            }
-        } else {
-            errorMessage.value = "Błąd: Odpowiedź API nie zawiera tablicy.";
+  </template>
+  
+  <script>
+  import api from "@/services/api";
+  
+  export default {
+    data() {
+      return {
+        jobOffers: [],
+        categories: [],
+        types: [],
+        selectedCategory: "",
+        selectedType: "",
+        searchText: "",
+        isLoading: false,
+      };
+    },
+    computed: {
+      filteredJobOffers() {
+        return this.jobOffers.filter((offer) => {
+          const search = this.searchText.toLowerCase();
+          const titleMatch = offer.title.toLowerCase().includes(search);
+          const descriptionMatch = offer.description.toLowerCase().includes(search);
+          const employerMatch = offer.employer.companyname.toLowerCase().includes(search);
+          const competenceMatch = offer.competences.some((competence) =>
+            competence.name.toLowerCase().includes(search)
+          );
+          return titleMatch || descriptionMatch || employerMatch || competenceMatch;
+        });
+      },
+    },
+    methods: {
+      viewJobOffer(offer) {
+        this.$router.push({ name: "JobOfferDetails", params: { id: offer.id } });
+      },
+      async fetchCategories() {
+        this.isLoading = true;
+        try {
+          const response = await api.getCompetenceList();
+          this.categories = response.data;
+        } catch (error) {
+          console.error("Error fetching categories:", error);
+        } finally {
+          this.isLoading = false;
         }
-    } catch (error) {
-        console.error("Error fetching offer types:", error);
-        errorMessage.value = "Nie udało się pobrać danych użytkownika.";
+      },
+      async fetchTypes() {
+        this.isLoading = true;
+        try {
+          const response = await api.getOfferTypes();
+          this.types = response.data;
+          console.log("Types loaded:", this.types);
+        } catch (error) {
+          console.error("Error fetching types:", error);
+        } finally {
+          this.isLoading = false;
+        }
+      },
+      async fetchJobOffersByCategory() {
+        this.isLoading = true;
+        if (!this.selectedCategory) {
+          await this.fetchJobOffers();
+          return;
+        }
+        try {
+          const response = await api.getJobOffersByCompetence(this.selectedCategory);
+          this.jobOffers = response.data.map((offer) => ({
+            ...offer,
+            showFullDescription: false,
+          }));
+        } catch (error) {
+          console.error("Error fetching job offers by category:", error);
+        } finally {
+          this.isLoading = false;
+        }
+      },
+      async fetchJobOffersByType() {
+        this.isLoading = true;
+        if (!this.selectedType) {
+          await this.fetchJobOffers();
+          return;
+        }
+        try {
+          const response = await api.getJobOffersByType(this.selectedType);
+          this.jobOffers = response.data.map((offer) => ({
+            ...offer,
+            showFullDescription: false,
+          }));
+        } catch (error) {
+          console.error("Error fetching job offers by type:", error);
+        } finally {
+          this.isLoading = false;
+        }
+      },
+      async fetchJobOffers() {
+        this.isLoading = true;
+        try {
+          const response = await api.getJobOffers();
+          this.jobOffers = response.data.map((offer) => ({
+            ...offer,
+            showFullDescription: false,
+          }));
+        } catch (error) {
+          console.error("Error fetching job offers:", error);
+        } finally {
+          this.isLoading = false;
+        }
+      },
+    },
+    mounted() {
+      this.fetchCategories();
+      this.fetchTypes();
+      this.fetchJobOffersByType();
+    },
+  };
+  </script>
+  
+  <style scoped>
+  .loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid white;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
     }
-};
-
-
-onMounted(fetchOfferTypes);
-
-const addOffer = async () => {
-    try {
-        await api.createOffer(offer.value);
-        successMessage.value = "Oferta została dodana pomyślnie!";
-        errorMessage.value = "";
-        offer.value = { title: "", description: "", expiration_date: "", type: "" };
-    } catch (err) {
-        errorMessage.value = "Błąd podczas dodawania oferty. Spróbuj ponownie.";
-        successMessage.value = "";
+    100% {
+      transform: rotate(360deg);
     }
-};
-</script>
-
-<style scoped>
-/* Opcjonalne ulepszenia stylu */
-label {
-    font-size: 0.875rem;
-}
-
-button {
-    font-size: 1rem;
-}
-</style>
+  }
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  </style>
+  
