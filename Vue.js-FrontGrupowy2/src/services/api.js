@@ -28,6 +28,9 @@ export default {
   myOffers() {
     return apiClient.get("/employer/my_offers");
   },
+  getOfferTypes(){
+    return apiClient.get("/offer/types");
+  },
   UpdateUser(data) {
     return apiClient.patch("/student/edit", data);
   },
