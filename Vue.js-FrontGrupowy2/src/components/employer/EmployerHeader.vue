@@ -4,11 +4,11 @@
     <!-- User Information -->
     <div class="flex items-center space-x-4">
       <div>
-<<<<<<< HEAD
+
         <p class="text-lg font-semibold">Jan Kowalski</p>
-=======
+
         <p class="text-lg font-semibold">{{ employerName }}</p>
->>>>>>> d45b9a1e42a21a192ef7243eda1aceaa3856e487
+
         <p class="text-sm text-gray-400">Pracodawca</p>
       </div>
     </div>
