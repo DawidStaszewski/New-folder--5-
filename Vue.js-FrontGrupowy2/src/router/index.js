@@ -12,9 +12,11 @@ import EmployerProfile from "@/views/employer/EmployerProfile.vue";
 import QuizPage from "@/views/student/QuizPage.vue";
 import EducationalMaterials from "@/views/student/EducationalMaterials.vue";
 import JobOffers from "@/views/student/JobOffers.vue";
+import JobOffersEmployer from "@/views/employer/JobOffersEmployer.vue";
 import StudentProfilePage from "@/views/student/StudentProfilePage.vue";
 import EmployerProfilePage from "@/views/employer/EmployerProfilePage.vue";
 import JobOfferDetails from "@/views/student/JobOfferDetails.vue";
+import JobOfferDetailsEmployer from "@/views/employer/JobOfferDetailsEmployer.vue";
 import EducationalMaterialDetail from "@/views/student/EducationalMaterialDetail.vue";
 import EmployersList from "@/views/admin/EmployersList.vue";
 import AdminCreateUser from "@/views/admin/AdminCreateUser.vue";
@@ -150,9 +152,22 @@ const router = createRouter({
       // meta: { requiresAuth: true, roles: [1] },
     },
     {
+      path: "/employer/JobOffersEmployer",
+      name: "JobOffersEmployer",
+      component: JobOffersEmployer,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
       path: "/student/job-offers/:id",
       name: "JobOfferDetails",
       component: JobOfferDetails,
+      props: true,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/employer/job-offers/:id",
+      name: "JobOfferDetailsEmployer",
+      component: JobOfferDetailsEmployer,
       props: true,
       // meta: { requiresAuth: true, roles: [1] },
     },
