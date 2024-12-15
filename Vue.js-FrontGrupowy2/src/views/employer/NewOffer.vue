@@ -2,7 +2,7 @@
     <div class="text-black">
         <div class="flex items-center justify-center py-20">
             <div class="w-3/5 bg-gray-500 border rounded-xl p-6">
-                <h2 class="text-center text-2xl mb-4">Dodaj nową Ofertę</h2>
+                <h2 class="text-center text-2xl mb-4 text-white">Dodaj nową Ofertę</h2>
                 <form @submit.prevent="addOffer">
                     <div class="mb-4">
                         <label for="title" class="block text-white">Tytuł:</label>
@@ -34,7 +34,7 @@
                                     :for="'offer_type_' + type.id" 
                                     :class="[
                                         'p-3 px-6 rounded-full cursor-pointer text-center transition duration-200',
-                                        offer.type === type.id ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                                        offer.type === type.id ? 'bg-blue-900 text-white' : 'bg-gray-200'
                                     ]">
                                     {{ type.name }}
                                 </label>
@@ -69,7 +69,7 @@ const errorMessage = ref('');
 const fetchOfferTypes = async () => {
     try {
         const response = await api.getOfferTypes();
-        const data = response.data.data;
+        const data = response.data;
         
         if (Array.isArray(data)) {
             offerTypes.value = data;

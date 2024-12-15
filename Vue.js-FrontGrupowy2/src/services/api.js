@@ -1,8 +1,8 @@
 import axios from "axios";
 import store from "@/store";
-axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = "http://localhost:8000/";
 export const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api", // Adjust the base URL to match your Laravel API URL
+  baseURL: "http://localhost:8000/api", // Adjust the base URL to match your Laravel API URL
   withCredentials: true, // Include credentials for CSRF protection if necessary
   headers: {
     "Content-Type": "application/json; charset=utf-8",
@@ -55,6 +55,12 @@ export default {
   },
   getJobOffersByCompetence(competenceId) {
     return apiClient.get(`/offer/competence/${competenceId}`);
+  },
+  getJobOffersByType(typeId) {
+    return apiClient.get(`/offer/type/${typeId}`);
+  },
+  getJobOffersByFilter(filter) {
+    return apiClient.get("/offers/filtered", filter);
   },
   getJobOfferById(id) {
     return apiClient.get(`/offer/${id}`);

@@ -6,6 +6,20 @@
       <h3 class="text-lg font-semibold text-gray-300 mb-4">Filtruj oferty</h3>
       <div class="flex flex-wrap justify-start gap-4">
         <div class="w-64">
+          <label for="type" class="block text-sm font-medium mb-2">Wymiar:</label>
+          <select
+            id="type"
+            v-model="selectedType"
+            @change="fetchJobOffersByType"
+            class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-full"
+          >
+            <option value="" selected>Wszystkie wymiary</option>
+            <option v-for="type in types" :key="type.id" :value="type.id">
+              {{ type.name }}
+            </option>
+          </select>
+        </div>
+        <div class="w-64">
           <label for="category" class="block text-sm font-medium mb-2">Kategoria:</label>
           <select
             id="category"
@@ -62,6 +76,16 @@
               {{ offer.description.length > 150 ? offer.description.slice(0, 150) + '...' : offer.description }}
             </p>
           </div>
+          <div class="mb-4">
+            <strong class="block text-gray-400 mb-2">Wymiar:</strong>
+            <div class="flex flex-wrap gap-2"> 
+            <span
+              class="inline-block bg-green-900 text-white px-3 py-1 rounded-full text-xs"
+            >
+            {{ offer.offer_type.name }}
+            </span>
+            </div>
+          </div>
 
           <div class="mb-4">
             <strong class="block text-gray-400 mb-2">Wymagane kompetencje:</strong>
@@ -104,7 +128,9 @@ export default {
     return {
       jobOffers: [],
       categories: [],
+      types: [],
       selectedCategory: "",
+      selectedType: "",
       searchText: "",
       isLoading: false,
     };
@@ -138,6 +164,18 @@ export default {
         this.isLoading = false;
       }
     },
+    async fetchTypes() {
+      this.isLoading = true;
+      try {
+        const response = await api.getOfferTypes();
+        this.types = response.data;
+        console.log("Types loaded:", this.types);
+      } catch (error) {
+        console.error("Error fetching types:", error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     async fetchJobOffersByCategory() {
       this.isLoading = true;
       if (!this.selectedCategory) {
@@ -152,6 +190,24 @@ export default {
         }));
       } catch (error) {
         console.error("Error fetching job offers by category:", error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async fetchJobOffersByType() {
+      this.isLoading = true;
+      if (!this.selectedType) {
+        await this.fetchJobOffers();
+        return;
+      }
+      try {
+        const response = await api.getJobOffersByType(this.selectedType);
+        this.jobOffers = response.data.map((offer) => ({
+          ...offer,
+          showFullDescription: false,
+        }));
+      } catch (error) {
+        console.error("Error fetching job offers by type:", error);
       } finally {
         this.isLoading = false;
       }
@@ -173,6 +229,7 @@ export default {
   },
   mounted() {
     this.fetchCategories();
+    this.fetchTypes();
     this.fetchJobOffers();
   },
 };
