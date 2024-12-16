@@ -10,7 +10,7 @@
           <select
             id="type"
             v-model="selectedType"
-            @change="fetchJobOffersByType"
+            @change="fetchJobOffers"
             class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-full"
           >
             <option value="" selected>Wszystkie wymiary</option>
@@ -24,7 +24,7 @@
           <select
             id="category"
             v-model="selectedCategory"
-            @change="fetchJobOffersByCategory"
+            @change="fetchJobOffers"
             class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-full"
           >
             <option value="" selected>Wszystkie kategorie</option>
@@ -213,9 +213,15 @@ export default {
       }
     },
     async fetchJobOffers() {
+      const filter = {
+        ...(this.selectedCategory ? { competence: Array.isArray(this.selectedCategory) ? this.selectedCategory : [this.selectedCategory] } : {}),
+        ...(this.selectedType ? { type: this.selectedType } : {}),
+      };
+      console.log(filter);
       this.isLoading = true;
       try {
-        const response = await api.getJobOffers();
+        const response = await api.getJobOffersByFilter(filter);
+        console.log("Job offers by type loaded:", response.data);
         this.jobOffers = response.data.map((offer) => ({
           ...offer,
           showFullDescription: false,

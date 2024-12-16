@@ -60,7 +60,7 @@ export default {
     return apiClient.get(`/offer/type/${typeId}`);
   },
   getJobOffersByFilter(filter) {
-    return apiClient.get("/offers/filtered", filter);
+    return apiClient.post("/offers/filtered", filter);
   },
   getJobOfferById(id) {
     return apiClient.get(`/offer/${id}`);
