@@ -176,42 +176,6 @@ export default {
         this.isLoading = false;
       }
     },
-    async fetchJobOffersByCategory() {
-      this.isLoading = true;
-      if (!this.selectedCategory) {
-        await this.fetchJobOffers();
-        return;
-      }
-      try {
-        const response = await api.getJobOffersByCompetence(this.selectedCategory);
-        this.jobOffers = response.data.map((offer) => ({
-          ...offer,
-          showFullDescription: false,
-        }));
-      } catch (error) {
-        console.error("Error fetching job offers by category:", error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-    async fetchJobOffersByType() {
-      this.isLoading = true;
-      if (!this.selectedType) {
-        await this.fetchJobOffers();
-        return;
-      }
-      try {
-        const response = await api.getJobOffersByType(this.selectedType);
-        this.jobOffers = response.data.map((offer) => ({
-          ...offer,
-          showFullDescription: false,
-        }));
-      } catch (error) {
-        console.error("Error fetching job offers by type:", error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
     async fetchJobOffers() {
       const filter = {
         ...(this.selectedCategory ? { competence: Array.isArray(this.selectedCategory) ? this.selectedCategory : [this.selectedCategory] } : {}),

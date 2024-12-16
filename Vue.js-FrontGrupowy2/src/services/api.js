@@ -31,6 +31,15 @@ export default {
   getOfferTypes(){
     return apiClient.get("/offer/types");
   },
+  getOfferCompetences() {
+    return apiClient.get("/offer/competences");
+  },
+  deleteOfferCompetence(competenceId) {
+    return apiClient.delete(`/admin/deletecompetences/${competenceId}`);
+  },
+  createOfferCompetence(data) {
+    return apiClient.post("/admin/createcompetence", data);
+  },
   UpdateUser(data) {
     return apiClient.patch("/student/edit", data);
   },

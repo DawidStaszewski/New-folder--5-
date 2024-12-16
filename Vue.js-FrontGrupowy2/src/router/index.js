@@ -20,6 +20,7 @@ import JobOfferDetailsEmployer from "@/views/employer/JobOfferDetailsEmployer.vu
 import EducationalMaterialDetail from "@/views/student/EducationalMaterialDetail.vue";
 import EmployersList from "@/views/admin/EmployersList.vue";
 import AdminCreateUser from "@/views/admin/AdminCreateUser.vue";
+import Competences from "@/views/admin/Competences.vue";
 import UserList from "@/views/admin/UserList.vue";
 import CareerOfficeMaterials from "@/views/career_office/CareerOfficeMaterials.vue";
 import MaterialDetail from "@/views/career_office/MaterialDetail.vue";
@@ -90,6 +91,15 @@ const router = createRouter({
       path: "/admin/employer-verification",
       name: "EmployersList",
       component: EmployersList,
+      // meta: {
+      //   requiresAuth: true,
+      //   roles: [4],
+      // },
+    },
+    {
+      path: "/admin/competences-list",
+      name: "Competences",
+      component: Competences,
       // meta: {
       //   requiresAuth: true,
       //   roles: [4],
