@@ -28,6 +28,9 @@ export default {
   myOffers() {
     return apiClient.get("/employer/my_offers");
   },
+  deleteOffer(offerId) {
+    return apiClient.delete(`/offer/delete/${offerId}`);
+  },
   getOfferTypes(){
     return apiClient.get("/offer/types");
   },
