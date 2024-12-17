@@ -51,26 +51,33 @@
         </p>
       </div>
 
-      <!-- Formularz aplikacji Form -->
-      <form @submit.prevent="submitApplication" class="pt-6">
-        <h4 class="text-lg font-semibold text-gray-300 mb-4">Złóż zgłoszenie:</h4>
-        <div class="mb-4">
-          <label for="cv" class="block text-gray-400 mb-2">Załącz CV (PDF, max 2MB):</label>
-          <input
-            type="file"
-            id="cv"
-            accept=".pdf"
-            @change="handleFileUpload"
-            class="block w-full text-gray-900 rounded-lg bg-gray-200"
-          />
-        </div>
-        <button
-          type="submit"
-          class="w-full p-3 bg-green-600 rounded hover:bg-green-700 text-white transition-transform transform"
-        >
-          Wyślij zgłoszenie
-        </button>
-      </form>
+      <div class="pt-6">
+  <h4 class="text-lg font-semibold text-gray-300 mb-4">Złóż zgłoszenie:</h4>
+  
+  <!-- Check if user has already applied -->
+  <div v-if="hasApplied" class="text-green-400 font-semibold text-center">
+    Już aplikowałeś na tę ofertę pracy. Powodzenia!
+  </div>
+  <!-- Application Form -->
+  <form v-else @submit.prevent="submitApplication">
+    <div class="mb-4">
+      <label for="cv" class="block text-gray-400 mb-2">Załącz CV (PDF, max 2MB):</label>
+      <input
+        type="file"
+        id="cv"
+        accept=".pdf"
+        @change="handleFileUpload"
+        class="block w-full text-gray-900 rounded-lg bg-gray-200"
+      />
+    </div>
+    <button
+      type="submit"
+      class="w-full p-3 bg-green-600 rounded hover:bg-green-700 text-white transition-transform transform"
+    >
+      Wyślij zgłoszenie
+    </button>
+  </form>
+</div>
     </div>
 
     <div v-else class="text-center">
@@ -88,6 +95,7 @@ export default {
       jobOffer: null,
       isLoading: true,
       selectedFile: null,
+      hasApplied: false,
     };
   },
   computed: {
@@ -105,7 +113,8 @@ export default {
     async fetchJobOfferDetails() {
       try {
         const response = await api.getJobOfferById(this.$route.params.id);
-        this.jobOffer = response.data;
+        this.jobOffer = response.data.offer;
+        this.hasApplied = response.data.has_applied;
       } catch (error) {
         console.error("Error fetching job offer details:", error);
       } finally {
@@ -132,7 +141,7 @@ export default {
       try {
         const response = await api.applyForJob(formData);
         alert("Zgłoszenie zostało wysłane pomyślnie!");
-        
+
         this.$router.push("/student/my_applications");
       } catch (error) {
         console.error("Error submitting application:", error);
