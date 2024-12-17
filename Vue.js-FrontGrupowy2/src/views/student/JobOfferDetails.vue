@@ -51,14 +51,26 @@
         </p>
       </div>
 
-      <div class="pt-6">
+      <!-- Formularz aplikacji Form -->
+      <form @submit.prevent="submitApplication" class="pt-6">
+        <h4 class="text-lg font-semibold text-gray-300 mb-4">Złóż zgłoszenie:</h4>
+        <div class="mb-4">
+          <label for="cv" class="block text-gray-400 mb-2">Załącz CV (PDF, max 2MB):</label>
+          <input
+            type="file"
+            id="cv"
+            accept=".pdf"
+            @change="handleFileUpload"
+            class="block w-full text-gray-900 rounded-lg bg-gray-200"
+          />
+        </div>
         <button
-          @click="applyForJob"
+          type="submit"
           class="w-full p-3 bg-green-600 rounded hover:bg-green-700 text-white transition-transform transform"
         >
-          Złóż zgłoszenie
+          Wyślij zgłoszenie
         </button>
-      </div>
+      </form>
     </div>
 
     <div v-else class="text-center">
@@ -75,6 +87,7 @@ export default {
     return {
       jobOffer: null,
       isLoading: true,
+      selectedFile: null,
     };
   },
   computed: {
@@ -103,12 +116,24 @@ export default {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString("pl-PL", options);
     },
-    async applyForJob() {
+    handleFileUpload(event) {
+      this.selectedFile = event.target.files[0];
+    },
+    async submitApplication() {
+      if (!this.selectedFile) {
+        alert("Wybierz plik CV przed wysłaniem zgłoszenia.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("offer_id", this.jobOffer.id);
+      formData.append("cv", this.selectedFile);
+
       try {
-        await api.applyForJob(this.jobOffer.id);
+        const response = await api.applyForJob(formData);
         alert("Zgłoszenie zostało wysłane pomyślnie!");
       } catch (error) {
-        console.error("Error applying for job:", error);
+        console.error("Error submitting application:", error);
         alert("Wystąpił problem podczas wysyłania zgłoszenia. Spróbuj ponownie później.");
       }
     },
