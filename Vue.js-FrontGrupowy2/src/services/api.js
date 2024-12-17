@@ -122,6 +122,11 @@ export default {
   getApplicationsByEmployer() {
     return apiClient.get('/employer/my_applications');
   },
+  getApplicationsByEmployerFiltered(data) {
+    return apiClient.get('/employer/my_applications/filtered', {
+        params: data // Pass the data as query parameters
+    });
+  },
   acceptApplication(applicationId) {
     return apiClient.post(`/employer/accept_application/${applicationId}`);
   },

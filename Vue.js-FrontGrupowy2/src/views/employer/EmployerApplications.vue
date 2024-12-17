@@ -3,16 +3,19 @@ import { ref, onMounted } from "vue";
 import api from "@/services/api";
 
 const applications = ref([]);
+const statusFilter = ref("all"); // New ref for filtering
 
-// Function to fetch applications from the API
+// Function to fetch applications from the API with a status filter
 const fetchApplications = async () => {
     try {
-        const response = await api.getApplicationsByEmployer(); // assuming you have this endpoint in your api service
+        // Pass the 'status' filter as a query parameter
+        const response = await api.getApplicationsByEmployerFiltered({ status: statusFilter.value });
         applications.value = response.data.applications || [];
     } catch (err) {
         console.error("Błąd podczas pobierania aplikacji", err);
     }
 };
+
 
 // Helper to return status class
 const statusClass = (status) => {
@@ -37,9 +40,8 @@ onMounted(() => {
 const acceptApplication = async (applicationId) => {
     try {
         const response = await api.acceptApplication(applicationId);
-        // Handle success (e.g., notify the user, refresh the list)
-        alert(response.data.message); // or any custom success notification
-        fetchApplications(); // Re-fetch the applications to reflect changes
+        alert(response.data.message);
+        fetchApplications(); // Re-fetch applications
     } catch (error) {
         console.error("Błąd podczas akceptacji aplikacji", error);
         alert("Wystąpił błąd podczas akceptacji aplikacji.");
@@ -50,13 +52,17 @@ const acceptApplication = async (applicationId) => {
 const rejectApplication = async (applicationId) => {
     try {
         const response = await api.rejectApplication(applicationId);
-        // Handle success (e.g., notify the user, refresh the list)
-        alert(response.data.message); // or any custom success notification
-        fetchApplications(); // Re-fetch the applications to reflect changes
+        alert(response.data.message);
+        fetchApplications(); // Re-fetch applications
     } catch (error) {
         console.error("Błąd podczas odrzucania aplikacji", error);
         alert("Wystąpił błąd podczas odrzucania aplikacji.");
     }
+};
+
+// Watch for changes in the filter and re-fetch applications
+const filterApplications = () => {
+    fetchApplications();
 };
 </script>
 
@@ -64,6 +70,19 @@ const rejectApplication = async (applicationId) => {
     <div class="p-8 bg-gray-900 text-white min-h-screen">
         <!-- Tytuł strony -->
         <h2 class="text-2xl font-bold text-blue-400 mb-6">Rozpatrz aplikacje</h2>
+
+        <!-- Filtry -->
+        <div class="mb-6 flex gap-4">
+            <select
+                v-model="statusFilter"
+                @change="filterApplications"
+                class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-64">
+                <option value="all">Wszystkie</option>
+                <option value="pending">Oczekujące</option>
+                <option value="approved">Zaakceptowane</option>
+                <option value="rejected">Odrzucone</option>
+            </select>
+        </div>
 
         <!-- Lista aplikacji -->
         <div v-if="applications.length > 0" class="flex flex-col gap-6">
@@ -79,8 +98,7 @@ const rejectApplication = async (applicationId) => {
                         </p>
                         <p class="text-sm text-gray-400">{{ application.offer.title }}</p>
                         <p class="text-sm text-gray-400">
-                            {{ application.offer.description.length > 150 ? application.offer.description.slice(0, 150) + '...' :
-                        application.offer.description }}
+                            {{ application.offer.description.length > 150 ? application.offer.description.slice(0, 150) + '...' : application.offer.description }}
                         </p>
                         <button
                             @click="downloadCv(application.cv)" 
