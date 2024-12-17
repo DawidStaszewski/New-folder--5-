@@ -132,6 +132,8 @@ export default {
       try {
         const response = await api.applyForJob(formData);
         alert("Zgłoszenie zostało wysłane pomyślnie!");
+        
+        this.$router.push("/student/my_applications");
       } catch (error) {
         console.error("Error submitting application:", error);
         alert("Wystąpił problem podczas wysyłania zgłoszenia. Spróbuj ponownie później.");
