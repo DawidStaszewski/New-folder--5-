@@ -7,66 +7,67 @@
             </div>
 
             <nav class="space-y-4">
-
                 <router-link to="/employer/new-offer"
                     class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-300" fill="none"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-green-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 4v16m8-8H4" />
                     </svg>
                     <span class="font-medium">Nowa Oferta</span>
                 </router-link>
+
                 <router-link to="/employer/my-offers"
                     class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-300" fill="none"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M4 6h16M4 12h8m-8 6h16" />
                     </svg>
                     <span class="font-medium">Moje Oferty</span>
                 </router-link>
+
                 <router-link to="/employer/JobOffersEmployer"
                     class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-300" fill="none"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-purple-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12h6m-3-3v6m-7 7h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                     <span class="font-medium">Wszystkie Oferty</span>
                 </router-link>
 
                 <router-link to="/employer/Applications"
                     class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-300" fill="none"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M8 6h13M8 12h9m-9 6h13M3 6h.01M3 12h.01M3 18h.01" />
                     </svg>
                     <span class="font-medium">Przeglądaj Aplikacje</span>
                 </router-link>
 
                 <router-link to="/employer/profile"
                     class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-300" fill="none"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-cyan-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5.121 17.804A13.937 13.937 0 0112 15c1.678 0 3.315.291 4.879.804M9 9h6M7 13h10M12 7c-4.418 0-8 3.582-8 8a1 1 0 001 1h14a1 1 0 001-1c0-4.418-3.582-8-8-8z" />
+                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M5.5 21v-2a4.5 4.5 0 014.5-4.5h4a4.5 4.5 0 014.5 4.5v2M12 11a4 4 0 100-8 4 4 0 000 8z" />
                     </svg>
                     <span class="font-medium">Uzupełnij Profil</span>
                 </router-link>
+
                 <button @click="handleLogout"
                     class="flex items-center p-3 rounded-lg bg-red-600 transition duration-300 hover:bg-red-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             d="M17 16l4-4m0 0l-4-4m4 4H7" />
                     </svg>
                     <span class="font-medium">Wyloguj</span>
                 </button>
             </nav>
         </div>
-
         <!-- Main Content -->
         <div class="flex-1">
             <EmployerHeader />
@@ -74,7 +75,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import { mapActions } from "vuex";
 import EmployerHeader from "./EmployerHeader.vue";
