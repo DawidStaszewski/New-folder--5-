@@ -127,6 +127,9 @@ export default {
         params: data // Pass the data as query parameters
     });
   },
+  getApplicationsByStudentFiltered(data) {
+    return apiClient.get('/student/my_applications/filtered', { params: data });
+  },
   acceptApplication(applicationId) {
     return apiClient.post(`/employer/accept_application/${applicationId}`);
   },

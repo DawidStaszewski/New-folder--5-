@@ -22,7 +22,7 @@ const statusClass = (status) => {
     switch (status) {
         case 'pending':
             return 'text-yellow-400';
-        case 'approved':
+        case 'accepted':
             return 'text-green-400';
         case 'rejected':
             return 'text-red-400';
@@ -79,7 +79,7 @@ const filterApplications = () => {
                 class="p-2 rounded border border-gray-700 bg-gray-700 text-white w-64">
                 <option value="all">Wszystkie</option>
                 <option value="pending">Oczekujące</option>
-                <option value="approved">Zaakceptowane</option>
+                <option value="accepted">Zaakceptowane</option>
                 <option value="rejected">Odrzucone</option>
             </select>
         </div>

@@ -13,6 +13,7 @@ import EmployerApplications from "@/views/employer/EmployerApplications.vue";
 import QuizPage from "@/views/student/QuizPage.vue";
 import EducationalMaterials from "@/views/student/EducationalMaterials.vue";
 import JobOffers from "@/views/student/JobOffers.vue";
+import StudentApplications from "@/views/student/StudentApplications.vue";
 import JobOffersEmployer from "@/views/employer/JobOffersEmployer.vue";
 import StudentProfilePage from "@/views/student/StudentProfilePage.vue";
 import EmployerProfilePage from "@/views/employer/EmployerProfilePage.vue";
@@ -160,6 +161,12 @@ const router = createRouter({
       path: "/student/job-offers",
       name: "JobOffers",
       component: JobOffers,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/student/my_applications",
+      name: "StudentApplications",
+      component: StudentApplications,
       // meta: { requiresAuth: true, roles: [1] },
     },
     {
