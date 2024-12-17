@@ -9,9 +9,11 @@ import UserBanTemporary from "@/views/UserBanTemporary.vue";
 import NewOffer from "@/views/employer/NewOffer.vue";
 import MyOffers from "@/views/employer/MyOffers.vue";
 import EmployerProfile from "@/views/employer/EmployerProfile.vue";
+import EmployerApplications from "@/views/employer/EmployerApplications.vue";
 import QuizPage from "@/views/student/QuizPage.vue";
 import EducationalMaterials from "@/views/student/EducationalMaterials.vue";
 import JobOffers from "@/views/student/JobOffers.vue";
+import StudentApplications from "@/views/student/StudentApplications.vue";
 import JobOffersEmployer from "@/views/employer/JobOffersEmployer.vue";
 import StudentProfilePage from "@/views/student/StudentProfilePage.vue";
 import EmployerProfilePage from "@/views/employer/EmployerProfilePage.vue";
@@ -162,9 +164,21 @@ const router = createRouter({
       // meta: { requiresAuth: true, roles: [1] },
     },
     {
+      path: "/student/my_applications",
+      name: "StudentApplications",
+      component: StudentApplications,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
       path: "/employer/JobOffersEmployer",
       name: "JobOffersEmployer",
       component: JobOffersEmployer,
+      // meta: { requiresAuth: true, roles: [1] },
+    },
+    {
+      path: "/employer/Applications",
+      name: "EmployerApplications",
+      component: EmployerApplications,
       // meta: { requiresAuth: true, roles: [1] },
     },
     {

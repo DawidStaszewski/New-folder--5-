@@ -110,6 +110,58 @@ export default {
   getCompetenceList() {
     return apiClient.get("/competence/list");
   },
+
+  // metody obsługujące aplikacje na ofertę pracy
+  applyForJob(formData) { 
+    return apiClient.post("/student/apply", formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+  },
+  getApplicationsByEmployer() {
+    return apiClient.get('/employer/my_applications');
+  },
+  getApplicationsByEmployerFiltered(data) {
+    return apiClient.get('/employer/my_applications/filtered', {
+        params: data // Pass the data as query parameters
+    });
+  },
+  getApplicationsByStudentFiltered(data) {
+    return apiClient.get('/student/my_applications/filtered', { params: data });
+  },
+  acceptApplication(applicationId) {
+    return apiClient.post(`/employer/accept_application/${applicationId}`);
+  },
+  rejectApplication(applicationId) {
+    return apiClient.post(`/employer/reject_application/${applicationId}`);
+  },
+  // pobieranie cv
+  downloadCV(cvFile) {
+    return apiClient.get(`/employer/cvs/${cvFile}`, { 
+      responseType: 'blob'
+    })
+    .then(response => {
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+
+      link.href = url;
+      link.download = cvFile;
+
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    })
+    .catch(error => {
+      console.error("Error downloading CV:", error);
+      throw error;
+    });
+  },
 };
 
 //Add token to request if exist

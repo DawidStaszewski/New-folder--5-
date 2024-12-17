@@ -26,6 +26,14 @@
             </svg>
             <span class="font-medium">Oferty Pracy</span>
           </router-link>
+          
+          <router-link to="/student/my_applications" class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span class="font-medium">Moje aplikacje</span>
+          </router-link>
+
           <router-link to="/student/profile" class="flex items-center p-3 rounded-lg transition duration-300 hover:bg-custom-darker-gray">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.678 0 3.315.291 4.879.804M9 9h6M7 13h10M12 7c-4.418 0-8 3.582-8 8a1 1 0 001 1h14a1 1 0 001-1c0-4.418-3.582-8-8-8z" />
